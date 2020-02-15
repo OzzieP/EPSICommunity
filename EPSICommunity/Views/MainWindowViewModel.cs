@@ -8,22 +8,6 @@ namespace EPSICommunity.Views
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private string _selectedName;
-        public string SelectedName
-        {
-            get { return _selectedName; }
-            set
-            {
-                _selectedName = value;
-                NotifyPropertyChanged("SelectedName");
-            }
-        }
-
-
-        public MainWindowViewModel()
-        {
-
-        }
 
     }
 }
