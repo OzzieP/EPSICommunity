@@ -76,9 +76,6 @@
                 <TextBlock Text="DOCUMENTATION" FontWeight="Bold" FontSize="16" />
             </Button>
 
-            <!--<TextBlock Text="{Binding SelectedName}"/>
-                <TextBox Text="{Binding SelectedName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="30"/>-->
-
             <Button Tag="PageHelp" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Height="Auto"
                     Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5">
                 <TextBlock Text="AIDE" FontWeight="Bold" FontSize="18"/>

@@ -27,7 +27,6 @@ namespace EPSICommunity.Views
             InitializeComponent();
             this._viewModel = new MainWindowViewModel();
             this.DataContext = this._viewModel;
-            GridBodyContent.Children.Add(new HomeUC());
         }
 
 
@@ -41,7 +40,6 @@ namespace EPSICommunity.Views
                 case "PageCommunity":
                     break;
                 case "PageTools":
-                    GridBodyContent.Children.Add(new ToolsUC());
                     break;
                 case "PageDocumentation":
                     break;
