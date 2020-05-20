@@ -47,5 +47,37 @@ namespace EPSICommunity.Views
                     break;
             }
         }
+
+        private void btn_profil(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // Setter tooltip visibility
+            if (Tgl_Btn.IsChecked == true)
+            {
+                tt_accueil.Visibility = Visibility.Collapsed;
+                tt_messagerie.Visibility = Visibility.Collapsed;
+                tt_code.Visibility = Visibility.Collapsed;
+                tt_ideas.Visibility = Visibility.Collapsed;
+                tt_ide.Visibility = Visibility.Collapsed;
+                tt_search.Visibility = Visibility.Collapsed;
+                tt_favoris.Visibility = Visibility.Collapsed;
+                tt_settings.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                tt_accueil.Visibility = Visibility.Visible;
+                tt_messagerie.Visibility = Visibility.Visible;
+                tt_code.Visibility = Visibility.Visible;
+                tt_ideas.Visibility = Visibility.Visible;
+                tt_ide.Visibility = Visibility.Visible;
+                tt_search.Visibility = Visibility.Visible;
+                tt_favoris.Visibility = Visibility.Visible;
+                tt_settings.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
