@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:EPSICommunity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:resources="clr-namespace:EPSICommunity.Resources"
-             StartupUri="Views/MainWindow.xaml">
+             Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
