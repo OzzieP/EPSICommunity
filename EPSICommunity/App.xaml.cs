@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using EPSICommunity.Views.Login;
 using ShowMeTheXAML;
 
 namespace EPSICommunity
@@ -14,10 +15,10 @@ namespace EPSICommunity
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected void OnStartup(object sender, StartupEventArgs e)
         {
-            XamlDisplay.Init();
-            base.OnStartup(e);
+            var login = new Login();
+            login.Show();
         }
     }
 }
