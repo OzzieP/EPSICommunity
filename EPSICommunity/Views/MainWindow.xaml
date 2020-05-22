@@ -83,8 +83,7 @@
                             BorderThickness="0">
                 <!--Toggle button default background image-->
                 <ToggleButton.Foreground>
-                  <!--<ImageBrush ImageSource="/EPSICommunity;Ressources/Images/logo.png"/>-->
-                  <ImageBrush ImageSource="D:\Programmes\VisualStudioProject\EpsiCommunity\EPSICommunity\Resources\Images\logo.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/Images/logo.png"/>
                 </ToggleButton.Foreground>
 
                 <!--Toggle Button - Checked, Unchecked events-->
@@ -275,7 +274,7 @@
                            Style="{StaticResource tt_style}"/>
                 </ListViewItem.ToolTip>
               </ListViewItem>
-
+                      
               <!--Settings-->
               <ListViewItem HorizontalAlignment="Left"
                             Margin="0,130,0,15"
