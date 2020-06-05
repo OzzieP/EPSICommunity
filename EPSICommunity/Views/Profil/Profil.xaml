@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:EPSICommunity.Views.Profil"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:showMeTheXaml="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML" 
-             mc:Ignorable="d" Background="White">
-             <!--mc:Ignorable="d" Background="White" Height="450" Width="800">-->
+             mc:Ignorable="d" Background="White" MinHeight="450" MinWidth="800">
 
     <Grid>
         <Grid>
