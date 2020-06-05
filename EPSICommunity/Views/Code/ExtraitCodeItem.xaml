@@ -1,0 +1,741 @@
+﻿<UserControl x:Class="EPSICommunity.Views.Code.ExtraitCodeItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EPSICommunity.Views.Code"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:converter="clr-namespace:EPSICommunity.Utils.Converter"
+             xmlns:template="clr-namespace:EPSICommunity.Utils.Template"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Background="#3e3e3e">
+    <UserControl.Resources>
+        <!-- Converter -->
+        <converter:PictureProfilConverter x:Key="PictureProfilConverter"></converter:PictureProfilConverter>
+        <converter:DateAgoConverter x:Key="DateAgoConverterKey"></converter:DateAgoConverter>
+
+        <!--Tooltip Style Template-->
+        <Style TargetType="ToolTip" x:Key="tt_style">
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Margin" Value="0,120,30,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFF"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="PlacementRectangle" Value="0,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <ControlTemplate x:Key="SelectedTemplate" 
+                         TargetType="ListBoxItem">
+            <Border CornerRadius="5"
+                    BorderThickness="1"
+                    BorderBrush="#40444B"
+                    Background="#BFBFBF"
+                    Padding="2" 
+                    Margin="5" 
+                    Tag="{Binding Value}" 
+                    Cursor="Hand"
+                    HorizontalAlignment="Stretch">
+                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                  ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                  ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"/>
+            </Border>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="CommentDataTemplate">
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Height="Auto"
+                  Margin="1,0"
+                  Background="#BFBFBF">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="94*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="30*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Width="20"
+                            Height="20"
+                            CornerRadius="50"
+                            BorderBrush="#BFBFBF"
+                            BorderThickness="0.6"
+                            HorizontalAlignment="Left"
+                            Margin="0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/unnamed.png" />
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Grid.Column="1"
+                               Foreground="#515151"
+                               HorizontalAlignment="Left"
+                               Text="{Binding Id}" 
+                               FontSize="12"
+                               Visibility="Hidden"/>
+                    <TextBlock Grid.Column="2"
+                               FontSize="12"
+                               Foreground="#515151"
+                               HorizontalAlignment="Left">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Prenom" />
+                                <Binding Path="Nom" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Grid.Column="3"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,5,0"
+                               Foreground="#40444B"
+                               Opacity="0.5"
+                               FontSize="10"
+                               Text="{Binding Date_Comment, Converter={StaticResource DateAgoConverterKey}}"/>
+                </Grid>
+                <TextBlock Grid.Row="1"
+                           Text="{Binding Content}"
+                           FontSize="16"
+                           Foreground="#40444B"
+                           Margin="15,0,0,0"
+                           Width="300"
+                           TextWrapping="Wrap"/>
+                <Grid Grid.Row="2"
+                      Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left"
+                                Orientation="Horizontal"
+                                Margin="10,0,5,0"
+                                x:Name="StackPanel_Like">
+                        <fa:ImageAwesome Icon="ThumbsOutlineUp" 
+                                         Height="10" 
+                                         Width="10"
+                                         Foreground="#40444B"
+                                         Margin="0,0,0,0"/>
+                        <TextBlock x:Name="LikeCounter"
+                                   Text="{Binding Path=ListIdLikers.Count, Mode=OneWay}"
+                                   Foreground="#40444B"
+                                   Background="Transparent"
+                                   Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <Button Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            Cursor="Hand"
+                            Click="LikeComment">
+                        <Button.Content>
+                            <TextBlock Text="J'aime"
+                                       FontWeight="Bold"
+                                       FontSize="10"
+                                       Foreground="#40444B"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            Cursor="Hand"
+                            Click="AddResponse">
+                        <Button.Content>
+                            <TextBlock Text="Répondre"
+                                       FontWeight="Bold"
+                                       FontSize="10"
+                                       Foreground="#40444B"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CommentResponseDataTemplate">
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Height="Auto"
+                  Margin="15,0,0,0"
+                  Background="#BFBFBF">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="94*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="30*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Width="20"
+                            Height="20"
+                            CornerRadius="50"
+                            BorderBrush="#BFBFBF"
+                            BorderThickness="0.6"
+                            HorizontalAlignment="Left"
+                            Margin="0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/Images/unnamed.png" />
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Grid.Column="1"
+                               Foreground="#515151"
+                               HorizontalAlignment="Left"
+                               Text="{Binding Id}" 
+                               FontSize="12"
+                               Visibility="Hidden"/>
+                    <TextBlock Grid.Column="2"
+                               FontSize="12"
+                               Foreground="#515151"
+                               HorizontalAlignment="Left">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Prenom" />
+                                <Binding Path="Nom" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Grid.Column="3"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,5,0"
+                               Foreground="#40444B"
+                               Opacity="0.5"
+                               FontSize="10"
+                               Text="{Binding Date_Comment, Converter={StaticResource DateAgoConverterKey}}"/>
+                </Grid>
+                <TextBlock Grid.Row="1"
+                           Text="{Binding Content}"
+                           FontSize="16"
+                           Foreground="#40444B"
+                           Margin="15,0,0,0"
+                           Width="300"
+                           TextWrapping="Wrap"/>
+                <Grid Grid.Row="2"
+                      Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left"
+                                Orientation="Horizontal"
+                                Margin="10,0,5,0"
+                                x:Name="StackPanel_Like">
+                        <fa:ImageAwesome Icon="ThumbsOutlineUp" 
+                                         Height="10" 
+                                         Width="10"
+                                         Foreground="#40444B"
+                                         Margin="0,0,0,0"/>
+                        <TextBlock x:Name="LikeCounter"
+                                   Text="{Binding Path=ListIdLikers.Count, Mode=OneWay}"
+                                   Foreground="#40444B"
+                                   Background="Transparent"
+                                   Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <Button Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            Cursor="Hand"
+                            Click="LikeComment">
+                        <Button.Content>
+                            <TextBlock Text="J'aime"
+                                       FontWeight="Bold"
+                                       FontSize="10"
+                                       Foreground="#40444B"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            Cursor="Hand"
+                            Click="AddResponse">
+                        <Button.Content>
+                            <TextBlock Text="Répondre"
+                                       FontWeight="Bold"
+                                       FontSize="10"
+                                       Foreground="#40444B"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <template:CommentListTemplate x:Key="CommentListTemplate"
+                                      CommentTemplate="{StaticResource CommentDataTemplate}"
+                                      CommentResponseTemplate="{StaticResource CommentResponseDataTemplate}">
+        </template:CommentListTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*" />
+                <ColumnDefinition Width="30*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Section de l'extrait -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="80*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header Extrait code -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <fa:ImageAwesome Icon="Code" 
+                                     Height="35"
+                                     Width="35"
+                                     Foreground="#FFF"
+                                     Margin="10,0,0,0"/>
+                    <!--{Binding Title}-->
+                    <TextBlock Grid.Column="1"
+                               x:Name="ExtraitCode_Title"
+                               Text=""
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               Margin="15,0,0,0"
+                               Foreground="#FFF"/>
+                    <StackPanel Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Cursor="Hand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25*"/>
+                                <ColumnDefinition Width="75*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Width="20"
+                                Height="20"
+                                CornerRadius="50"
+                                BorderBrush="#202225"
+                                BorderThickness="0.6"
+                                Margin="0, 0, 0, 0">
+                                <Border.Background>
+                                    <ImageBrush x:Name="Picture_Creator" 
+                                                ImageSource="pack://application:,,,/Resources/Images/unnamed.png"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                   x:Name="ExtraitCode_Creator"
+                                   Text=""
+                                   Foreground="#BFBFBF"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="2,0,0,0"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Description Extrait de code -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="ExtraitCode_Description"
+                           Text=""
+                           Foreground="#BFBFBF"
+                           Margin="10,0,10,0"
+                           VerticalAlignment="Center"/>
+
+                    <fa:ImageAwesome Grid.Column="1"
+                                         x:Name="DeleteExtraitCodeIcon"
+                                         Icon="TrashOutline"
+                                         Width="20"
+                                         Foreground="#BFBFBF"
+                                         Cursor="Hand"
+                                         PreviewMouseLeftButtonDown="DeleteExtraitCode"
+                                         MouseEnter="HoverDelete" MouseLeave="LostHoverDelete"
+                                         />
+
+
+                    <fa:ImageAwesome Grid.Column="2"
+                                     x:Name="FavorisExtraitCodeIcon"
+                                     Icon="HeartOutline"
+                                     Width="20"
+                                     Foreground="#BFBFBF"
+                                     Cursor="Hand"
+                                     PreviewMouseLeftButtonDown="AddToFavoris" MouseEnter="HoverFavoris" MouseLeave="LostHoverFavoris"
+                                     />
+                </Grid>
+
+                <!-- Date Creation -->
+                <TextBlock Grid.Row="2"
+                           Name="ExtraitCode_DateCreation"
+                           Text=""
+                           Foreground="#BFBFBF"
+                           Margin="10,0,0,0"
+                           FontFamily="Arial"/>
+
+
+                <!-- Extrait code container -->
+                <Border Grid.Row="3"
+                        Background="#40444B"
+                        Padding="5"
+                        Margin="10,5"
+                        CornerRadius="15">
+                    <TextBox Name="ExtraitCode_Code"
+                             IsReadOnly="True"
+                             Text=""
+                             TextWrapping="Wrap"
+                             FontFamily="Consolas"
+                             Foreground="#BFBFBF"
+                             BorderThickness="0"
+                             Background="Transparent"/>
+                </Border>
+            </Grid>
+            <!--Section Plus extrait -->
+            <Grid Grid.Column="1">
+                <!--Border Left-->
+                <Grid Height="400" 
+                        HorizontalAlignment="Left" 
+                        Margin="0,0,0,0"
+                        VerticalAlignment="Center"
+                        Width="1"
+                        Background="#BFBFBF"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="30*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Note -->
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="70*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Note :"
+                                   Foreground="#BFBFBF"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   Margin="10,0,0,0"/>
+                        <TextBlock Grid.Column="1"
+                                   x:Name="ExtraitCode_Note"
+                                   Text=""
+                                   FontSize="16"
+                                   Foreground="#BFBFBF"
+                                   HorizontalAlignment="Right"
+                                   Margin="0,1,5,0"/>
+                        <TextBlock Grid.Column="2"
+                                   Text="/5"
+                                   FontFamily="16"
+                                   Foreground="#BFBFBF"
+                                   HorizontalAlignment="Left"
+                                   Margin="3,6,0,0"/>
+                        <Grid Grid.Column="3" MouseLeave="HoverStarNote">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+                            <fa:ImageAwesome x:Name="StarNote1"
+                                             Icon="Star"
+                                             Width="20"
+                                             Foreground="#BFBFBF"
+                                             Cursor="Hand"
+                                             MouseEnter="HoverStarNote1" 
+                                             PreviewMouseLeftButtonDown="ClickStarNote1"/>
+                            <fa:ImageAwesome Grid.Column="1"
+                                             x:Name="StarNote2"
+                                             Icon="Star"
+                                             Width="20"
+                                             Foreground="#BFBFBF"
+                                             Cursor="Hand"
+                                             MouseEnter="HoverStarNot2" 
+                                             PreviewMouseLeftButtonDown="ClickStarNote2"/>
+                            <fa:ImageAwesome Grid.Column="2"
+                                             x:Name="StarNote3"
+                                             Icon="Star"
+                                             Width="20"
+                                             Foreground="#BFBFBF"
+                                             Cursor="Hand" 
+                                             MouseEnter="HoverStarNote3"
+                                             PreviewMouseLeftButtonDown="ClickStarNote3"/>
+                            <fa:ImageAwesome Grid.Column="3"
+                                             x:Name="StarNote4"
+                                             Icon="Star"
+                                             Width="20"
+                                             Foreground="#BFBFBF"
+                                             Cursor="Hand" 
+                                             MouseEnter="HoverStarNote4" 
+                                             PreviewMouseLeftButtonDown="ClickStarNote4"/>
+                            <fa:ImageAwesome Grid.Column="4"
+                                             x:Name="StarNote5"
+                                             Icon="StarOutline"
+                                             Width="20"
+                                             Foreground="#BFBFBF"
+                                             Cursor="Hand" 
+                                             MouseEnter="HoverStarNote5"
+                                             PreviewMouseLeftButtonDown="ClickStarNote5"/>
+                        </Grid>
+                    </Grid>
+                    <!-- Total of vote -->
+                    <TextBlock Grid.Row="1"
+                               x:Name="ExtraitCode_TotalVote"
+                               Text=""
+                               FontSize="9"
+                               Foreground="#202225"
+                               Margin="10,0,0,0"/>
+
+                    <!-- List User Approuving Extrait Code-->
+                    <Grid Grid.Row="2"
+                          x:Name="ApprouvedBlock">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="70*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="ApprouverText"
+                                   Text="Approuvé par"
+                                   Foreground="#515151"
+                                   VerticalAlignment="Center"
+                                   Margin="0,10,0,5"
+                                   HorizontalAlignment="Center"/>
+                        <Grid Grid.Column="1"
+                              VerticalAlignment="Center"
+                              x:Name="ApprouverListGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="ApprouverListContainer1"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="50"
+                                    BorderBrush="#BFBFBF"
+                                    BorderThickness="0.6"
+                                    Margin="0, 10, 0, 2">
+                                <Border.Background>
+                                    <ImageBrush x:Name="ApprouverList1"
+                                                ImageSource="/Resources/Images/unnamed.png" />
+                                </Border.Background>
+                                <Border.ToolTip>
+                                    <ToolTip x:Name="tt_approuver1"
+                                             Content=""
+                                             Style="{StaticResource tt_style}"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <Border Grid.Column="1"
+                                    x:Name="ApprouverListContainer2"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="50"
+                                    BorderBrush="#BFBFBF"
+                                    BorderThickness="0.6"
+                                    Margin="0, 10, 0, 2">
+                                <Border.Background>
+                                    <ImageBrush x:Name="ApprouverList2"
+                                                ImageSource="/Resources/Images/unnamed.png" />
+                                </Border.Background>
+                                <Border.ToolTip>
+                                    <ToolTip x:Name="tt_approuver2"
+                                             Content=""
+                                             Style="{StaticResource tt_style}"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <Border Grid.Column="2"
+                                    x:Name="ApprouverListContainer3"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="50"
+                                    BorderBrush="#BFBFBF"
+                                    BorderThickness="0.6"
+                                    Margin="0, 10, 0, 2">
+                                <Border.Background>
+                                    <ImageBrush x:Name="ApprouverList3"
+                                                ImageSource="/Resources/Images/unnamed.png" />
+                                </Border.Background>
+                                <Border.ToolTip>
+                                    <ToolTip x:Name="tt_approuver3"
+                                             Content=""
+                                             Style="{StaticResource tt_style}"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <Border Grid.Column="3"
+                                    x:Name="ApprouverListContainer4"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="50"
+                                    BorderBrush="#BFBFBF"
+                                    BorderThickness="0.6"
+                                    Margin="0, 10, 0, 2">
+                                <Border.Background>
+                                    <ImageBrush x:Name="ApprouverList4"
+                                                ImageSource="/Resources/Images/unnamed.png" />
+                                </Border.Background>
+                                <Border.ToolTip>
+                                    <ToolTip x:Name="tt_approuver4"
+                                             Content=""
+                                             Style="{StaticResource tt_style}"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <Border Grid.Column="4"
+                                    x:Name="ApprouverListContainer5"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="50"
+                                    BorderBrush="#BFBFBF"
+                                    BorderThickness="0.6"
+                                    Margin="0, 10, 0, 2">
+                                <Border.Background>
+                                    <ImageBrush x:Name="ApprouverList5"
+                                                ImageSource="/Resources/Images/unnamed.png" />
+                                </Border.Background>
+                                <Border.ToolTip>
+                                    <ToolTip x:Name="tt_approuver5"
+                                             Content=""
+                                             Style="{StaticResource tt_style}"/>
+                                </Border.ToolTip>
+                            </Border>
+                            <TextBlock Grid.Column="5"
+                                       x:Name="ApprouverListPLus"
+                                       Text="..."
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0,0,0"
+                                       Cursor="Hand">
+                                <TextBlock.ToolTip>
+                                    <ToolTip x:Name="tt_approuverList"
+                                             Content="LENGLET Julien"
+                                             Style="{StaticResource tt_style}"/>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                    <TextBlock Grid.Row="3"
+                             Text="COMMENTAIRES"
+                             Foreground="#40444B"
+                             Background="Transparent"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Margin="5,0,0,0"
+                             FontSize="16"
+                             FontWeight="Bold"
+                             Cursor="Hand"/>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="80*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="TextBlock_Reponse"
+                                   Text="Réponse à "
+                                   Foreground="#BFBFBF"
+                                   FontSize="11"
+                                   VerticalAlignment="Bottom"
+                                   Margin="5,0,0,0"
+                                   Visibility="Collapsed"/>
+                        <TextBlock Grid.Column="1"
+                                   x:Name="TextBlock_ReponseName"
+                                   Text=""
+                                   Foreground="#BFBFBF"
+                                   FontSize="8"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,0,0,0"
+                                   Visibility="Collapsed"/>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="103*"/>
+                            <ColumnDefinition Width="137*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="80*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Add Comment -->
+                        <Grid Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="AddComment"
+                                     Text="Écrire un commentaire..."
+                                     FontSize="9"
+                                     Margin="5,0,0,5"
+                                     Background="#BFBFBF"
+                                     Foreground="#40444B"
+                                     PreviewMouseLeftButtonDown="Focus_AddTextBox" 
+                                     LostFocus="LostFocus_TextBox"/>
+
+                            <Border Grid.Column="1"
+                                    BorderBrush="#202225"
+                                    BorderThickness="1"
+                                    Background="#202225"
+                                    CornerRadius="50"
+                                    Height="20"
+                                    Width="20"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,0,5"
+                                    Cursor="Hand" 
+                                    PreviewMouseLeftButtonDown="SendComment">
+                                <fa:ImageAwesome Icon="LocationArrow" 
+                                                 Height="20" 
+                                                 Width="10"
+                                                 Foreground="#BFBFBF"
+                                                 Rotation="40"
+                                                 Margin="0,0,2,0"/>
+                            </Border>
+                        </Grid>
+
+                        <!-- Comments List -->
+                        <StackPanel Grid.Row="1"
+                                    x:Name="CommentBlock"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,0,0,0.2">
+                            <ListBox  x:Name="ListComments"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      ItemTemplateSelector="{StaticResource CommentListTemplate}">
+
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
