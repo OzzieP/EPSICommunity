@@ -167,7 +167,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Code\ExtraitCodeItem.xaml">
-
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Administration\Administration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
