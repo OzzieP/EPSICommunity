@@ -83,8 +83,7 @@
                             BorderThickness="0">
                 <!--Toggle button default background image-->
                 <ToggleButton.Foreground>
-                  <!--<ImageBrush ImageSource="/EPSICommunity;Ressources/Images/logo.png"/>-->
-                  <ImageBrush ImageSource="D:\Programmes\VisualStudioProject\EpsiCommunity\EPSICommunity\Resources\Images\logo.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/Images/logo.png"/>
                 </ToggleButton.Foreground>
 
                 <!--Toggle Button - Checked, Unchecked events-->
@@ -276,7 +275,14 @@
                 </ListViewItem.ToolTip>
               </ListViewItem>
 
-              <!--Settings-->
+              <ListViewItem HorizontalAlignment="Left">
+                  <Button Tag="PageAdministration" Grid.Row="1" Grid.Column="3" Height="Auto"
+                          Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
+                      <TextBlock Text="ADMINISTRATION" FontWeight="Bold" FontSize="16" />
+                  </Button>
+              </ListViewItem>
+
+                        <!--Settings-->
               <ListViewItem HorizontalAlignment="Left"
                             Margin="0,130,0,15"
                             MouseEnter="ListViewItem_MouseEnter">
@@ -340,41 +346,9 @@
         <Grid Name="Body"
               Margin="55,0,0,0">
 
-          <Grid Name="GridBodyContent" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="100*"/>
-              <ColumnDefinition Width="200*"/>
-              <ColumnDefinition Width="200*"/>
-              <ColumnDefinition Width="200*"/>
-              <ColumnDefinition Width="100*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="50*"/>
-              <RowDefinition Height="150*"/>
-              <RowDefinition Height="50*"/>
-              <RowDefinition Height="50*"/>
-            </Grid.RowDefinitions>
-
-            <Button Tag="PageCommunity" Grid.Row="1" Grid.Column="1" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-              <TextBlock Text="COMMUNAUTÉ" FontWeight="Bold" FontSize="16" />
-            </Button>
-
-            <Button Tag="PageTools" Grid.Row="1" Grid.Column="2" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-              <TextBlock Text="OUTILS" FontWeight="Bold" FontSize="16" />
-            </Button>
-
-            <Button Tag="PageDocumentation" Grid.Row="1" Grid.Column="3" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-              <TextBlock Text="DOCUMENTATION" FontWeight="Bold" FontSize="16" />
-            </Button>
-
-            <Button Tag="PageHelp" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5">
-              <TextBlock Text="AIDE" FontWeight="Bold" FontSize="18"/>
-            </Button>
-          </Grid>
+            <Grid Grid.Row="1">
+                <ContentControl Name="ContentArea"/>
+            </Grid>
         </Grid>
 
       </Grid>

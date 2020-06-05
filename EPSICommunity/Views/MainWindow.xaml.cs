@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EPSICommunity.Views.Administration;
 
 namespace EPSICommunity.Views
 {
@@ -32,12 +33,12 @@ namespace EPSICommunity.Views
 
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            GridBodyContent.Children.Clear();
-            string tagUid =  ((Button) e.Source).Uid;
+            string tagUid =  ((Button) e.Source).Tag.ToString();
 
             switch (tagUid)
             {
-                case "PageCommunity":
+                case "PageAdministration":
+                    ContentArea.Content = new Administration.Administration();
                     break;
                 case "PageTools":
                     break;
