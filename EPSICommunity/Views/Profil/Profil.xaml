@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="EPSICommunity.Views.Profil.Profil"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:EPSICommunity.Views.Profil"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:showMeTheXaml="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML" 
+             mc:Ignorable="d" Background="White" MinHeight="450" MinWidth="800">
+
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300*"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Todo List-->
+            <Grid Grid.Column="0" Visibility="{Binding ShowTodoList, Converter={StaticResource TrueToVisible}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Liste des tâches" FontSize="20" FontWeight="DemiBold" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignIconButton}" Foreground="DarkRed" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_CloseTodoList">
+                        <materialDesign:PackIcon Kind="CloseBox" Height="35" Width="35"/>
+                    </Button>
+                </Grid>
+
+                <Expander Grid.Row="1" IsExpanded="True" Header="En cours" Background="LightGray" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        <ListBox>
+
+                        </ListBox>
+                    </StackPanel>
+                </Expander>
+
+                <Expander Grid.Row="2" IsExpanded="True" Header="Terminées" Background="LightGray" HorizontalAlignment="Stretch" Margin="0, 10, 0, 0">
+                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        <ListBox>
+
+                        </ListBox>
+                    </StackPanel>
+                </Expander>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Profil-->
+            <Grid Grid.Column="0" Visibility="{Binding ShowProfile, Converter={StaticResource TrueToVisible}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="200*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Content="Modifier mon profil" FontSize="12" Padding="5" Height="Auto" Margin="10, 10, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                    <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                        <Ellipse Height="100" Width="100">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Default_Profile_Picture.png" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="Prénom NOM" FontSize="16"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Right" Margin="0, 5, 0, 10">
+                        <TextBlock>
+                            <Run Text="Date de naissance : "/>
+                            <Run Text="{Binding BirthDate}"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Date d'inscription : "/>
+                            <Run Text="{Binding RegistrationDate}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0, 0, 0, 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="100*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Activité" FontSize="16" Margin="10, 0, 0, 0"/>
+                        <Separator>
+                            <Separator.RenderTransform>
+                                <ScaleTransform ScaleY="2"/>
+                            </Separator.RenderTransform>
+                        </Separator>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1">
+
+                    </ListBox>
+                </Grid>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Favoris-->
+            <Grid Grid.Column="1" Background="LightGray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Star" Foreground="#FCAF16" Height="25" Width="25"/>
+                        <TextBlock Text="FAVORIS" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <ListBox Margin="5">
+
+                    </ListBox>
+                </StackPanel>
+
+                <Button Grid.Row="1" Margin="5" Click="Button_OpenTodoList">
+                    <DockPanel HorizontalAlignment="Center">
+                        <Image Source="pack://application:,,,/Resources/Images/Checkmark.png" MaxHeight="25" MaxWidth="25" DockPanel.Dock="Left" Margin="0, 0, 5, 0"/>
+                        <TextBlock Text="To-Do List" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+            </Grid>
+            <!--#endregion-->
+        </Grid>
+    </Grid>
+</UserControl>
