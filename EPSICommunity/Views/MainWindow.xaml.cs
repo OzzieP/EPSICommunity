@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.Session;
+using EPSICommunity.Views.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +31,9 @@ namespace EPSICommunity.Views
             InitializeComponent();
             this._viewModel = new MainWindowViewModel();
             this.DataContext = this._viewModel;
+            dataUtils.SetDataUtils();
+
+            UserConnected.SetUserConnected(dataUtils.GetListUsers()[0]);
         }
 
 
@@ -79,6 +85,16 @@ namespace EPSICommunity.Views
                 tt_favoris.Visibility = Visibility.Visible;
                 tt_settings.Visibility = Visibility.Visible;
             }
+        }
+
+        private void Messagerie_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Code_Click(object sender, MouseButtonEventArgs e)
+        {
+            Body.Children.Add(new ExtraitCodeHome());
         }
     }
 }
