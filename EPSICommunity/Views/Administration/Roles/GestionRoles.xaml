@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="EPSICommunity.Views.Administration.Roles.GestionRoles"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EPSICommunity.Views.Administration.Roles"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             MinHeight="450" MinWidth="800" Background="White">
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="400*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="400*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Gestion des rôles"
+                       FontSize="18" FontWeight="DemiBold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="LISTE DES RÔLES"
+                           FontSize="14" FontWeight="DemiBold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Separator Grid.Row="1">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="2"/>
+                    </Separator.RenderTransform>
+                </Separator>
+
+                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" 
+                        Background="Green" BorderBrush="Green"
+                        ToolTip="Ajouter un rôle" ToolTipService.Placement="Right"
+                        HorizontalAlignment="Left" Click="ShowFormAdd_OnClick">
+                    <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" Foreground="White"/>
+                </Button>
+
+                <ListBox Grid.Row="3" ItemsSource="{Binding Roles}" 
+                         SelectionMode="Single" SelectedItem="{Binding SelectedRole}"
+                         SelectionChanged="SelectorRoles_OnSelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="1" Background="{DynamicResource MaterialDesignPaper}" Margin="5, 5, 0, 0">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShowFormAdd}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ShowFormEdit}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedRole}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <!--Formulaire d'ajout-->
+                <Grid Visibility="{Binding ShowFormAdd, Converter={StaticResource TrueToVisible}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Ajout d'un rôle" FontSize="12"/>
+
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="Nom : "/>
+                        <TextBox Text="{Binding SelectedName}"/>
+                        <Button Content="Valider" Margin="0, 10, 0, 0" Click="ValidateAdd_OnClick"/>
+                    </StackPanel>
+                </Grid>
+
+                <!--Formulaire de modification-->
+                <!--<Grid Visibility="{Binding ShowFormEdit, Converter={StaticResource TrueToVisible}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" FontSize="12">
+                        <Run Text="Modification du rôle : "/>
+                        <Run Text="{Binding SelectedRole.Name}" FontWeight="DemiBold"/>
+                    </TextBlock>
+                </Grid>-->
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

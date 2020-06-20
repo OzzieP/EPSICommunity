@@ -96,5 +96,10 @@ namespace EPSICommunity.Views
         {
             Body.Children.Add(new ExtraitCodeHome());
         }
+
+        private void Administration_Click(object sender, MouseButtonEventArgs e)
+        {
+            Body.Children.Add(new Administration.Administration());
+        }
     }
 }

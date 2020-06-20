@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EPSICommunity.Views.Administration.Roles;
 using EPSICommunity.Views.Administration.Utilisateurs;
 
 namespace EPSICommunity.Views.Administration
@@ -41,6 +42,7 @@ namespace EPSICommunity.Views.Administration
                     ContentArea.Content = new GestionUtilisateurs();
                     break;
                 case "PageRoles":
+                    ContentArea.Content = new GestionRoles();
                     break;
             }
 
