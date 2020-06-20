@@ -130,7 +130,9 @@
                                         Width="230">
                                 <fa:ImageAwesome Icon="Home" Height="25" Width="25"
                                                  Foreground="#FFF"
-                                                 Margin="8,0,0,0"/>
+                                                 Margin="8,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageAccueil"/>
                                 <TextBlock Text="Accueil"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -152,7 +154,9 @@
                                         Width="230">
                                 <fa:ImageAwesome Icon="CommentOutline" Height="25" Width="25"
                                                  Foreground="#FFF"
-                                                 Margin="8,0,0,0"/>
+                                                 Margin="8,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageMessagerie"/>
                                 <TextBlock Text="Messagerie"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -177,7 +181,8 @@
                                                  Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0" 
-                                                 PreviewMouseLeftButtonDown="Code_Click"/>
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageCode"/>
                                 <TextBlock Text="Code"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -199,7 +204,9 @@
                                         Width="230">
                                 <fa:ImageAwesome Icon="LightbulbOutline" Height="25" Width="25"
                                                  Foreground="#FFF"
-                                                 Margin="8,0,0,0"/>
+                                                 Margin="8,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageIdees"/>
                                 <TextBlock Text="Idées"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -221,7 +228,9 @@
                                         Width="230">
                                 <fa:ImageAwesome Icon="Laptop" Height="25" Width="25"
                                                  Foreground="#FFF"
-                                                 Margin="8,0,0,0"/>
+                                                 Margin="8,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageIDEs"/>
                                 <TextBlock Text="IDEs"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -243,7 +252,9 @@
                                         Width="230">
                                 <fa:ImageAwesome Icon="Search" Height="20" Width="18"
                                                  Foreground="#FFF"
-                                                 Margin="13,0,0,0"/>
+                                                 Margin="13,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageRecherche"/>
                                 <TextBlock Text="Recherche"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -265,7 +276,9 @@
                                         Width="230">
                                 <fa:ImageAwesome Icon="StarOutline" Height="25" Width="25"
                                                  Foreground="#FFF"
-                                                 Margin="8,0,0,0"/>
+                                                 Margin="8,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageFavoris"/>
                                 <TextBlock Text="Favoris"
                                            Margin="25,0,0,0"
                                            Height="14px"
@@ -285,9 +298,11 @@
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <md:PackIcon Kind="AccountSupervisorCircle" Height="25" Width="25" 
-                                             Foreground="White" Margin="8,0,0,0"
-                                             PreviewMouseLeftButtonDown="Administration_Click"/>
+                                <fa:ImageAwesome Icon="IdBadge" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 PreviewMouseLeftButtonDown="ChangePage"
+                                                 Tag="PageAdministration"/>
                                 <TextBlock Text="Administration" 
                                            Margin="25,0,0,0" 
                                            Height="14px"
@@ -362,12 +377,9 @@
                     </ListView>
                 </StackPanel>
             </Grid>
-            <Grid Name="Body"
-                  Margin="55,0,0,0">
 
-                <Grid Grid.Row="1">
-                    <ContentControl Name="ContentArea"/>
-                </Grid>
+            <Grid Margin="55, 0, 0, 0">
+                <ContentControl Name="ContentArea"/>
             </Grid>
 
         </Grid>
