@@ -297,7 +297,18 @@
                 </ListViewItem.ToolTip>
               </ListViewItem>
 
-              <!--Listview items style template-->
+                        <ListViewItem HorizontalAlignment="Left"
+                            Margin="0,130,0,15"
+                            MouseEnter="ListViewItem_MouseEnter">
+                           
+                            <Button Tag="PageHelp" Grid.Row="1" Grid.Column="3" Margin="10" Height="Auto"
+                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
+                            <TextBlock Text="Help" FontWeight="Bold" FontSize="16" />
+                        </Button>
+                        </ListViewItem>
+
+
+                        <!--Listview items style template-->
               <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                   <Setter Property="Template">
@@ -338,8 +349,11 @@
         </Grid>
         <Grid Name="Body"
               Margin="55,0,0,0">
+                <Grid Grid.Row="1">
+                    <ContentControl Name="ContentArea"/>
+                </Grid>
 
-          <Grid Name="GridBodyContent" Grid.Row="1">
+                <!--<Grid Name="GridBodyContent" Grid.Row="1">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="100*"/>
               <ColumnDefinition Width="200*"/>
@@ -373,7 +387,7 @@
                     Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5">
               <TextBlock Text="AIDE" FontWeight="Bold" FontSize="18"/>
             </Button>
-          </Grid>
+          </Grid>-->
         </Grid>
 
       </Grid>

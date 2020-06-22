@@ -21,11 +21,9 @@ namespace EPSICommunity.Views.Communaute.Documentation
 
         private List<String> _listeLanguage;
 
-        public ObservableCollection<String> ListeLanguage { get; set; }
+        public ICollectionView ListeLanguage { get; set; }
 
         private String _selectedLanguage;
-
-
 
         public String SelectedLanguage
         {
@@ -97,7 +95,7 @@ namespace EPSICommunity.Views.Communaute.Documentation
                 "c#","java","sql"
             };
 
-            ListeLanguage = new ObservableCollection<string>(_listeLanguage);
+            ListeLanguage = CollectionViewSource.GetDefaultView(_listeLanguage);
 
         }
 

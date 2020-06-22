@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EPSICommunity.Views.Communaute.Aide;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,8 +33,8 @@ namespace EPSICommunity.Views
 
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            GridBodyContent.Children.Clear();
-            string tagUid =  ((Button) e.Source).Uid;
+            //GridBodyContent.Children.Clear();
+            string tagUid =  ((Button) e.Source).Tag.ToString();
 
             switch (tagUid)
             {
@@ -44,6 +45,7 @@ namespace EPSICommunity.Views
                 case "PageDocumentation":
                     break;
                 case "PageHelp":
+                    ContentArea.Content = new Aide();
                     break;
             }
         }
