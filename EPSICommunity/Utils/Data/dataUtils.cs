@@ -54,21 +54,34 @@ namespace EPSICommunity.Utils.data
         {
             listMessages = new List<Message>
             {
-                new Message(1, 3, 1, "CAZIN", "Nicolas", "Salut tu vas bien ?", "19/05/2020", "22:37", 1),
-                new Message(2, 1, 3, "DUBOIS", "Mathieu", "Niquel et toi ?", "20/05/2020", "22:41", 1),
-                new Message(3, 2, 1, "CAZIN", "Nicolas", "J'ai fais la merge request", "19/05/2020", "23:01", 1),
-                new Message(4, 2, 1, "CAZIN", "Nicolas", "C'est à jour", "19/05/2020", "23:02", 1),
-                new Message(5, 1, 2, "LEGRAND", "Quentin", "Ok niquel merci !", "19/05/2020", "23:05", 0),
-                new Message(6, 4, 6, "LORENTE", "Romain", "Hey mon beau", "19/05/2020", "14:12", 1),
-                new Message(7, 6, 4, "LEGENDRE", "Brendan","Bien ou bien", "19/05/2020", "14:18", 0),
-                new Message(8, 6, 4, "LEGENDRE", "Brendan", "Je suis HS", "19/05/2020", "14:19", 0),
-                new Message(9, 3, 5, "WILLERVAL", "Romain", "Hello", "19/05/2020", "10:33", 1),
-                new Message(10, 5, 3, "DUBOIS", "Mathieu", "Hi bien ?", "19/05/2020", "12:08", 1),
-                new Message(11, 3, 5, "WILLERVAL", "Romain", "Oklm et toi", "19/05/2020", "12:11", 1),
-                new Message(12, 2, 6, "LORENTE", "Romain", "Salut tu vas bien ?", "19/05/2020", "15:17", 0),
-                new Message(13, 5, 6, "LORENTE", "Romain", "Oui ca commence à aller mieux ! Merci :)", "19/05/2020", "16:48", 0),
-                new Message(14, 1, 6, "LORENTE", "Romain", "Bien mon pote ?", "20/05/2020", "17:11", 0),
-                new Message(15, 3, 1, "CAZIN", "Nicolas", "Re", "21/05/2020", "11:06", 1)
+                new Message(1, 3, 1, "CAZIN", "Nicolas", "Salut tu vas bien ?", "19/05/2020", "22:37:12", 1),
+                new Message(2, 1, 3, "DUBOIS", "Mathieu", "Niquel et toi ?", "20/05/2020", "22:41:48", 1),
+                new Message(3, 3, 1, "CAZIN", "Nicolas", "Tranquile tranquille", "20/05/2020", "22:47:52", 1),
+                new Message(4, 2, 1, "CAZIN", "Nicolas", "J'ai fais la merge request", "19/05/2020", "23:01:15", 1),
+                new Message(5, 2, 1, "CAZIN", "Nicolas", "C'est à jour", "19/05/2020", "23:02:45", 1),
+                new Message(6, 1, 2, "LEGRAND", "Quentin", "Ok niquel merci !", "19/05/2020", "23:05:37", 0),
+                new Message(7, 4, 6, "LORENTE", "Romain", "Hey mon beau", "19/05/2020", "14:12:12", 1),
+                new Message(8, 6, 4, "LEGENDRE", "Brendan","Bien ou bien", "19/05/2020", "14:18:19", 0),
+                new Message(9, 6, 4, "LEGENDRE", "Brendan", "Je suis HS", "19/05/2020", "14:19:11", 0),
+                new Message(10, 3, 5, "WILLERVAL", "Romain", "Hello", "19/05/2020", "10:33:38", 1),
+                new Message(11, 5, 3, "DUBOIS", "Mathieu", "Hi bien ?", "19/05/2020", "12:08:49", 1),
+                new Message(12, 3, 5, "WILLERVAL", "Romain", "Oklm et toi", "19/05/2020", "12:11:02", 1),
+                new Message(13, 2, 6, "LORENTE", "Romain", "Salut tu vas bien ?", "19/05/2020", "15:17:14", 0),
+                new Message(14, 5, 6, "LORENTE", "Romain", "Oui ca commence à aller mieux ! Merci :)", "19/05/2020", "16:48:33", 0),
+                new Message(15, 1, 6, "LORENTE", "Romain", "Bien mon pote ?", "20/05/2020", "17:11:46", 0),
+                new Message(16, 3, 1, "CAZIN", "Nicolas", "Re", "21/05/2020", "11:06:52", 1),
+                new Message(17, 1, 3, "DUBOIS", "Mathieu", "Re", "21/05/2020", "11:14:08", 1),
+                new Message(18, 3, 1, "CAZIN", "Nicolas", "Est-ce que tu pourrais me dire où est-ce que tu en es sur le projet ?", "21/05/2020", "11:18:43", 1),
+                new Message(19, 3, 1, "CAZIN", "Nicolas", "Parce que sur ma partie je vais avoir besoin d'utiliser ce que tu as  fait, ou le refaire par dessus.. mais c'est pas ouf", "21/05/2020", "11:19:28", 1),
+                new Message(20, 3, 1, "CAZIN", "Nicolas", "Merci :D", "21/05/2020", "11:19:46", 1),
+                new Message(21, 1, 3, "DUBOIS", "Mathieu", "Oui désolé, j'ai fini mais j'ai oublié de commit mon travail", "21/05/2020", "11:21:22", 1),
+                new Message(22, 1, 3, "DUBOIS", "Mathieu", "Je te fais ça tout de suite", "21/05/2020", "11:21:53", 1),
+                new Message(23, 3, 1, "CAZIN", "Nicolas", "Ok merci !", "21/05/2020", "11:22:03", 1),
+                new Message(24, 1, 3, "DUBOIS", "Mathieu", "C'est fait !", "21/05/2020", "11:25:14", 1),
+                new Message(25, 1, 3, "DUBOIS", "Mathieu", "Tout est bon ?", "21/05/2020", "11:25:32", 1),
+                new Message(26, 3, 1, "CAZIN", "Nicolas", "Oui nickel merci", "21/05/2020", "11:27:53", 1),
+                new Message(27, 1, 3, "DUBOIS", "Mathieu", "Dac bon courage", "21/05/2020", "11:28:46", 1),
+                new Message(28, 3, 1, "CAZIN", "Nicolas", "Merci !", "21/05/2020", "11:29:12", 1)
             };
         }
 
@@ -87,19 +100,45 @@ namespace EPSICommunity.Utils.data
             listMessages.Add(new Message(listMessages.Count + 1, RecipientId, SenderId, nom, prenom, content, dateSending, horaireSending, 0));
         }
 
+        public static Message GetMessage(int idMessage)
+        {
+            return listMessages.Find(x => x.Id == idMessage);
+        }
+
+        public static void DeleteMessage(Message message)
+        {
+            listMessages.Remove(message);
+        }
+
+        public static void DeleteMessages(List<int> idsMessages)
+        {
+            foreach (int i in idsMessages)
+            {
+                DeleteMessage(listMessages.Find(x => x.Id == i));
+            }
+        }
+
+        public static void DeleteMessages(List<Message> messages)
+        {
+            foreach (Message m in messages)
+            {
+                DeleteMessage(m);
+            }
+        }
+
 
         /* -- Conversation -- */
         public static void SetListConversations()
         {
             listConversations = new List<Conversation>
             {
-                new Conversation(1, new List<int>{3, 1}, new List<int>{1, 2, 15}),
-                new Conversation(2, new List<int>{2, 1}, new List<int>{3, 4, 5}),
-                new Conversation(3, new List<int>{4, 6}, new List<int>{6, 7, 8}),
-                new Conversation(4, new List<int>{3, 5}, new List<int>{9, 10, 11}),
-                new Conversation(5, new List<int>{2, 6}, new List<int>{12}),
-                new Conversation(6, new List<int>{5, 6}, new List<int>{13}),
-                new Conversation(7, new List<int>{1, 6}, new List<int>{14})
+                new Conversation(1, new List<int>{3, 1}, new List<int>{1, 2, 3, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28}),
+                new Conversation(2, new List<int>{2, 1}, new List<int>{4, 5, 6}),
+                new Conversation(3, new List<int>{4, 6}, new List<int>{7, 8, 9}),
+                new Conversation(4, new List<int>{3, 5}, new List<int>{10, 11, 12}),
+                new Conversation(5, new List<int>{2, 6}, new List<int>{13}),
+                new Conversation(6, new List<int>{5, 6}, new List<int>{14}),
+                new Conversation(7, new List<int>{1, 6}, new List<int>{15})
             };
         }
 
@@ -108,9 +147,34 @@ namespace EPSICommunity.Utils.data
             listConversations.Add(new Conversation(listConversations.Count + 1, new List<int> { UserConnectedId, CorrespondantId }, new List<int> { MessageId }));
         }
 
+        public static void AddMessageToConversation(int idConversation, int idMessage)
+        {
+            GetListConversations().Find(x => x.Id == idConversation).Messages.Add(idMessage);
+        }
+
+        public static Conversation GetConversation(int idConversation)
+        {
+            return GetListConversations().Find(x => x.Id == idConversation);
+        }
+
+        public static List<Message> GetMessagesOfConversation(int idConversation)
+        {
+            List<Message> messagesOfConversation = new List<Message>();
+            foreach (int i in GetConversation(idConversation).Messages)
+            {
+                messagesOfConversation.Add(GetMessage(i));
+            }
+            return messagesOfConversation;
+        }
+
         public static List<Conversation> GetListConversations()
         {
             return listConversations;
+        }
+
+        public static void DeleteConversation(int idConversation)
+        {
+            listConversations.Remove(listConversations.Find(x => x.Id == idConversation));
         }
 
         /* -- Extrait code -- */

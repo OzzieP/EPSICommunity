@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EPSICommunity.Views.Administration;
+using EPSICommunity.Views.Messagerie;
 using FontAwesome.WPF;
 
 namespace EPSICommunity.Views
@@ -49,7 +50,7 @@ namespace EPSICommunity.Views
                     
                     break;
                 case "PageMessagerie":
-
+                    ContentArea.Content = new MessagerieHome();
                     break;
                 case "PageCode":
                     ContentArea.Content = new ExtraitCodeHome();
