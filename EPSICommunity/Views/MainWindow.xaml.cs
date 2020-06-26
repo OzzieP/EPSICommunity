@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EPSICommunity.Views.Administration;
 using EPSICommunity.Views.Messagerie;
+using FontAwesome.WPF;
 
 namespace EPSICommunity.Views
 {
@@ -40,18 +41,34 @@ namespace EPSICommunity.Views
 
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            string tagUid =  ((Button) e.Source).Tag.ToString();
+            //ContentArea.Content = null;
+            string tagUid =  ((ImageAwesome) e.Source).Tag.ToString();
 
             switch (tagUid)
             {
+                case "PageAccueil":
+                    
+                    break;
+                case "PageMessagerie":
+                    ContentArea.Content = new MessagerieHome();
+                    break;
+                case "PageCode":
+                    ContentArea.Content = new ExtraitCodeHome();
+                    break;
+                case "PageIdees":
+
+                    break;
+                case "PageIDEs":
+
+                    break;
+                case "PageRecherche":
+
+                    break;
+                case "PageFavoris":
+
+                    break;
                 case "PageAdministration":
                     ContentArea.Content = new Administration.Administration();
-                    break;
-                case "PageTools":
-                    break;
-                case "PageDocumentation":
-                    break;
-                case "PageHelp":
                     break;
             }
         }
@@ -86,21 +103,6 @@ namespace EPSICommunity.Views
                 tt_favoris.Visibility = Visibility.Visible;
                 tt_settings.Visibility = Visibility.Visible;
             }
-        }
-
-        private void Messagerie_click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Code_Click(object sender, MouseButtonEventArgs e)
-        {
-            Body.Children.Add(new ExtraitCodeHome());
-        }
-
-        private void Messagerie_click(object sender, MouseButtonEventArgs e)
-        {
-            Body.Children.Add(new MessagerieHome());
         }
     }
 }

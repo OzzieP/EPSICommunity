@@ -109,8 +109,8 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Nom" Binding="{Binding LastName}"/>
-                        <DataGridTextColumn Header="Prénom" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
+                        <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}"/>
                         <DataGridTextColumn Header="Rôle" Binding="{Binding Role}"/>
                     </DataGrid.Columns>
                 </DataGrid>
