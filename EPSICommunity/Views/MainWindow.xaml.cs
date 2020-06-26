@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EPSICommunity.Views.Administration;
+using EPSICommunity.Views.Messagerie;
 
 namespace EPSICommunity.Views
 {
@@ -95,6 +96,11 @@ namespace EPSICommunity.Views
         private void Code_Click(object sender, MouseButtonEventArgs e)
         {
             Body.Children.Add(new ExtraitCodeHome());
+        }
+
+        private void Messagerie_click(object sender, MouseButtonEventArgs e)
+        {
+            Body.Children.Add(new MessagerieHome());
         }
     }
 }

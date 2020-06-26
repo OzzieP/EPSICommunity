@@ -149,9 +149,12 @@
                             MouseEnter="ListViewItem_MouseEnter">
                 <StackPanel Orientation="Horizontal"
                             Width="230">
-                  <fa:ImageAwesome Icon="CommentOutline" Height="25" Width="25"
+                  <fa:ImageAwesome Icon="CommentOutline"
+                                   Height="25"
+                                   Width="25"
                                    Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
+                                   Margin="8,0,0,0" 
+                                   PreviewMouseLeftButtonDown="Messagerie_click" />
                   <TextBlock Text="Messagerie"
                              Margin="25,0,0,0"
                              Height="14px"
@@ -175,7 +178,8 @@
                                    Height="25"
                                    Width="25"
                                    Foreground="#FFF"
-                                   Margin="8,0,0,0" PreviewMouseLeftButtonDown="Code_Click"/>
+                                   Margin="8,0,0,0"
+                                   PreviewMouseLeftButtonDown="Code_Click"/>
                   <TextBlock Text="Code"
                              Margin="25,0,0,0"
                              Height="14px"

@@ -113,11 +113,15 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Vote.cs" />
     <Compile Include="Utils\Converter\DateAgoConverter.cs" />
+    <Compile Include="Utils\Converter\FontBoldConverter.cs" />
+    <Compile Include="Utils\Converter\FontColorConverter.cs" />
     <Compile Include="Utils\Converter\PictureProfilConverter.cs" />
     <Compile Include="Utils\Data\dataUtils.cs" />
     <Compile Include="Utils\Session\UserConnected.cs" />
     <Compile Include="Utils\Template\CommentListTemplate.cs" />
+    <Compile Include="Utils\Template\MessageListTemplate.cs" />
     <Compile Include="Utils\Template\TemplateClass\ItemListComment.cs" />
+    <Compile Include="Utils\Template\TemplateClass\ItemListMessage.cs" />
     <Compile Include="Utils\Transformer\TextEncoder.cs" />
     <Compile Include="Views\Code\AddExtraitCode.xaml.cs">
       <DependentUpon>AddExtraitCode.xaml</DependentUpon>
@@ -138,6 +142,16 @@
       <DependentUpon>GestionUtilisateurs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Administration\Utilisateurs\GestionUtilisateursViewModel.cs" />
+    <Compile Include="Views\Messagerie\Chat\AddChat.xaml.cs">
+      <DependentUpon>AddChat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messagerie\Chat\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messagerie\MessagerieHome.xaml.cs">
+      <DependentUpon>MessagerieHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messagerie\MessageViewModel.cs" />
     <Compile Include="Views\Profil\Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>
     </Compile>
@@ -183,6 +197,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messagerie\Chat\AddChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messagerie\Chat\Chat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messagerie\MessagerieHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
