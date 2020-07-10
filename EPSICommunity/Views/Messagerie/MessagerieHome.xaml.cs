@@ -1,5 +1,6 @@
 ﻿using EPSICommunity.Model;
 using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.Habilitation;
 using EPSICommunity.Utils.Session;
 using EPSICommunity.Views.Messagerie.Chat;
 using System;
@@ -34,6 +35,11 @@ namespace EPSICommunity.Views.Messagerie
             _messageViewModel = new MessageViewModel();
 
             this.ListView_Messages.Style = null;
+
+            if (!UserConnected.VerifyHabilitation("100_4xCVN"))
+            {
+                BtnAddConversation.Cursor = Cursors.No;
+            }
 
             _lastsMessages = OrganiseLastMessageInContactList(_messageViewModel.Conversations);
             ICollectionView _lastMessageViewModel = CollectionViewSource.GetDefaultView(_lastsMessages);
@@ -91,8 +97,15 @@ namespace EPSICommunity.Views.Messagerie
 
         private void AddNewConversation(object sender, RoutedEventArgs e)
         {
-            this.Body_Conversation.Children.Clear();
-            this.Body_Conversation.Children.Add(new AddChat());
+            if (!UserConnected.VerifyHabilitation("100_4xCVN"))
+            {
+                MessageHabilitation.MessageNoHabilitatePersonnalized("créer une nouvelle conversation !");
+            }
+            else
+            {
+                this.Body_Conversation.Children.Clear();
+                this.Body_Conversation.Children.Add(new AddChat());
+            }
         }
     }
 }

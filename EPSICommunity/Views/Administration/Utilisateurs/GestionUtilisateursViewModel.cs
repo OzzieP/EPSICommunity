@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using EPSICommunity.Model;
+using EPSICommunity.Utils.data;
 
 namespace EPSICommunity.Views.Administration.Utilisateurs
 {
@@ -19,14 +20,7 @@ namespace EPSICommunity.Views.Administration.Utilisateurs
 
         public GestionUtilisateursViewModel()
         {
-            _listUsers = new List<User>
-            {
-                new User(1, "abc", "LEGENDRE", "Brendan"),
-                new User(1, "abc", "DUBOIS", "Matthieu"),
-                new User(1, "abc", "CAZIN", "Nicolas"),
-                new User(1, "abc", "LORENTE", "Romain"),
-                new User(1, "abc", "LEGRAND", "Quentin")
-            };
+            _listUsers = dataUtils.GetListUsers();
 
             Users = CollectionViewSource.GetDefaultView(_listUsers);
             Users.Refresh();

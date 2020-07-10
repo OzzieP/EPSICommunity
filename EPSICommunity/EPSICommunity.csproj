@@ -104,20 +104,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Classe.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Conversation.cs" />
+    <Compile Include="Model\DemandeSuppression.cs" />
+    <Compile Include="Model\Droit.cs" />
     <Compile Include="Model\ExtraitCode.cs" />
     <Compile Include="Model\ExtraitCodeApprouved.cs" />
     <Compile Include="Model\Favoris.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\RestrictionDroit.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserRole.cs" />
     <Compile Include="Model\Vote.cs" />
     <Compile Include="Utils\Converter\DateAgoConverter.cs" />
     <Compile Include="Utils\Converter\FontBoldConverter.cs" />
     <Compile Include="Utils\Converter\FontColorConverter.cs" />
     <Compile Include="Utils\Converter\PictureProfilConverter.cs" />
     <Compile Include="Utils\Data\dataUtils.cs" />
+    <Compile Include="Utils\Habilitation\MessageHabilitation.cs" />
     <Compile Include="Utils\Session\UserConnected.cs" />
     <Compile Include="Utils\Template\CommentListTemplate.cs" />
     <Compile Include="Utils\Template\MessageListTemplate.cs" />

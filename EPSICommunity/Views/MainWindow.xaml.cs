@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using EPSICommunity.Views.Administration;
 using EPSICommunity.Views.Messagerie;
 using FontAwesome.WPF;
+using EPSICommunity.Utils.Habilitation;
 
 namespace EPSICommunity.Views
 {
@@ -68,7 +69,20 @@ namespace EPSICommunity.Views
 
                     break;
                 case "PageAdministration":
-                    ContentArea.Content = new Administration.Administration();
+                    List<int> idRoles = UserConnected.GetUserConnected().GetIdRoles();
+                    if (idRoles.Contains(5) || idRoles.Contains(4) || idRoles.Contains(3) || idRoles.Contains(2) || idRoles.Contains(1))
+                    {
+                        if (UserConnected.VerifyHabilitations()) {
+                            ContentArea.Content = new Administration.Administration();
+                        }
+                        else {
+                            MessageHabilitation.MessageNoHabilitate();
+                        }
+                    }
+                    else
+                    {
+                        MessageHabilitation.MessageNoHabilitate();
+                    }
                     break;
             }
         }

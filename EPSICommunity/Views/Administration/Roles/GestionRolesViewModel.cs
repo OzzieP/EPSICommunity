@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using EPSICommunity.Model;
+using EPSICommunity.Utils.data;
 
 namespace EPSICommunity.Views.Administration.Roles
 {
@@ -63,13 +64,7 @@ namespace EPSICommunity.Views.Administration.Roles
 
         public GestionRolesViewModel()
         {
-            _listRoles = new List<Role>
-            {
-                new Role(1, "Administrateur"),
-                new Role(2, "Super Administrateur"),
-                new Role(3, "Utilisateur"),
-                new Role(4, "Professeur")
-            };
+            _listRoles = dataUtils.GetListRoles();
 
             Roles = CollectionViewSource.GetDefaultView(_listRoles);
             Roles.Refresh();
@@ -81,7 +76,8 @@ namespace EPSICommunity.Views.Administration.Roles
                 MessageBox.Show("Veuillez saisir un nom valide", "Attention", 
                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
-            _listRoles.Add(new Role(5, SelectedName));
+            dataUtils.AddRole(SelectedName);
+            _listRoles = dataUtils.GetListRoles();
             Roles.Refresh();
         }
     }

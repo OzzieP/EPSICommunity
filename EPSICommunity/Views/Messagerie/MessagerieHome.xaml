@@ -61,7 +61,8 @@
                     </TextBlock>
 
                     <!--Ligne 1 // Section 3-->
-                    <Button  Grid.Column="2"
+                    <Button x:Name="BtnAddConversation"
+                            Grid.Column="2"
                              Width="30"
                              Background="Transparent"
                              BorderThickness="0"

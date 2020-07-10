@@ -44,7 +44,8 @@
                     </TextBlock>
 
                     <!--Ligne 1 // Section 3-->
-                    <fa:ImageAwesome Grid.Column="1"
+                    <fa:ImageAwesome x:Name="BtnAddExtrait"
+                                     Grid.Column="1"
                                      Icon="PlusCircle" 
                                      Height="20"
                                      Width="20"
