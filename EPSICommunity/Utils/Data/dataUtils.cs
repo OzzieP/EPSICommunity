@@ -149,6 +149,11 @@ namespace EPSICommunity.Utils.data
             return listUsers;
         }
 
+        public static User GetUserByMailAdress(String mail)
+        {
+            return listUsers.Find(x => x.Mail == mail);
+        }
+
         /* -- Classe -- */
         public static void SetListClasses()
         {

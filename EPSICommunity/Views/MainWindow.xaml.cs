@@ -34,9 +34,6 @@ namespace EPSICommunity.Views
             InitializeComponent();
             this._viewModel = new MainWindowViewModel();
             this.DataContext = this._viewModel;
-            dataUtils.SetDataUtils();
-
-            UserConnected.SetUserConnected(dataUtils.GetListUsers()[0]);
         }
 
 
