@@ -293,7 +293,7 @@
                                      Background="#40444B"
                                      TextWrapping="Wrap"
                                      Foreground="#BFBFBF"
-                                     Padding="5,,0,0"
+                                     Padding="5,0,0,0"
                                      BorderThickness="0"
                                      VerticalScrollBarVisibility="Auto" />
                             <Border Grid.Column="1"
@@ -366,16 +366,18 @@
                              BorderThickness="0"
                              Cursor="Hand"/>
                     <Grid Grid.Row="4">
-                        <StackPanel HorizontalAlignment="Center"
+                        <StackPanel x:Name="BtnDeleteConversation"
+                                    HorizontalAlignment="Center"
                                     Orientation="Horizontal"
-                                    Cursor="Hand" PreviewMouseLeftButtonDown="DeleteConversation"
-                                    >
+                                    Cursor="Hand"
+                                    PreviewMouseLeftButtonDown="DeleteConversation" >
                             <fa:ImageAwesome Icon="TrashOutline" 
                                      Height="20" 
                                      Width="20"
                                      Foreground="#BFBFBF"
                                      Margin="0,0,0,0"/>
-                            <TextBox Grid.Column="1" 
+                            <TextBox x:Name="BtnDeleteConversationText"
+                                     Grid.Column="1" 
                                      Text="Supprimer la conversation"
                                      Background="Transparent"
                                      Foreground="#BFBFBF"

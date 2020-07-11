@@ -1,5 +1,6 @@
 ﻿using EPSICommunity.Model;
 using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.Habilitation;
 using EPSICommunity.Utils.Session;
 using EPSICommunity.Utils.Template.TemplateClass;
 using System;
@@ -32,6 +33,17 @@ namespace EPSICommunity.Views.Messagerie.Chat
         public Chat(Conversation conversation)
         {
             InitializeComponent();
+            if (!UserConnected.VerifyHabilitation("100_1xMSE"))
+            {
+                TextBox_Comment.IsReadOnly = true;
+                TextBox_Comment.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EB4034"));
+                TextBox_Comment.Cursor = Cursors.No;
+            }
+            if (!UserConnected.VerifyHabilitation("100_4xCVN"))
+            {
+                BtnDeleteConversation.Cursor = Cursors.No;
+                BtnDeleteConversationText.Cursor = Cursors.No;
+            }
             conv = conversation;
             OrganizeListMessage();
             this.TextBox_Comment.AcceptsTab = true;
@@ -225,19 +237,26 @@ namespace EPSICommunity.Views.Messagerie.Chat
 
         private void DeleteConversation(object sender, MouseButtonEventArgs e)
         {
-            dataUtils.DeleteMessages(dataUtils.GetMessagesOfConversation(conv.Id));
-            dataUtils.DeleteConversation(conv.Id);
-            TextBlock NoChatText = new TextBlock
+            if (!UserConnected.VerifyHabilitation("100_4xCVN"))
             {
-                Text = "Aucun message à afficher...",
-                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")),
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Name = "NoChatText"
-            };
-            ReOrganiseLastMessageInContactList();
-            ((Grid)this.Parent).Children.Add(NoChatText);
-            ((Grid)this.Parent).Children.Remove(this);
+                MessageHabilitation.MessageNoHabilitatePersonnalized("supprimer la conversation !");
+            }
+            else
+            {
+                dataUtils.DeleteMessages(dataUtils.GetMessagesOfConversation(conv.Id));
+                dataUtils.DeleteConversation(conv.Id);
+                TextBlock NoChatText = new TextBlock
+                {
+                    Text = "Aucun message à afficher...",
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Name = "NoChatText"
+                };
+                ReOrganiseLastMessageInContactList();
+                ((Grid)this.Parent).Children.Add(NoChatText);
+                ((Grid)this.Parent).Children.Remove(this);
+            }
         }
 
         private void ReOrganiseLastMessageInContactList()

@@ -1,4 +1,6 @@
 ﻿using EPSICommunity.Model;
+using EPSICommunity.Utils.Habilitation;
+using EPSICommunity.Utils.Session;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +33,11 @@ namespace EPSICommunity.Views.Code
 
             this.ListView_ExtraitsCode.Style = null;
 
+            if (!UserConnected.VerifyHabilitation("100_1xCD0"))
+            {
+                BtnAddExtrait.Cursor = Cursors.No;
+            }
+
             ICollectionView lesExtraitsCode = _codeViewModel.ExtraitsCode;
             this.ListView_ExtraitsCode.ItemsSource = lesExtraitsCode.Cast<ExtraitCode>().OrderBy(x => x.Date_Creation).ToList();
         }
@@ -52,8 +59,15 @@ namespace EPSICommunity.Views.Code
 
         private void ClickNewExtraitCode(object sender, MouseButtonEventArgs e)
         {
-            this.Body_Extrait.Children.Remove(NoExtraitText);
-            this.Body_Extrait.Children.Add(new AddExtraitCode());
+            if (!UserConnected.VerifyHabilitation("100_1xCD0"))
+            {
+                MessageHabilitation.MessageNoHabilitatePersonnalized("créer un nouvel extrait de code !");
+            }
+            else
+            {
+                this.Body_Extrait.Children.Remove(NoExtraitText);
+                this.Body_Extrait.Children.Add(new AddExtraitCode());
+            }
         }
     }
 }

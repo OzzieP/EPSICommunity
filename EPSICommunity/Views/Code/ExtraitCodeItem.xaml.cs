@@ -1,8 +1,10 @@
 ﻿using EPSICommunity.Model;
 using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.Habilitation;
 using EPSICommunity.Utils.Session;
 using EPSICommunity.Utils.Template.TemplateClass;
 using EPSICommunity.Utils.Transformer;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,7 @@ namespace EPSICommunity.Views.Code
     public partial class ExtraitCodeItem : UserControl
     {
         private readonly ExtraitCode ec;
+        private List<User> _listApprouvedUser;
         private int IdCommentToResponse;
         private List<Comment> _listComments;
         private List<ItemListComment> _listItemComment;
@@ -33,8 +36,26 @@ namespace EPSICommunity.Views.Code
         public ExtraitCodeItem(ExtraitCode extraitCode)
         {
             InitializeComponent();
+            if (!UserConnected.VerifyHabilitation("100_4xCD0"))
+            {
+                DeleteExtraitCodeIcon.Cursor = Cursors.No;
+            }
+            if (!UserConnected.VerifyHabilitation("100_1xCMT"))
+            {
+                AddComment.Cursor = Cursors.No;
+                AddComment.Text = "";
+                AddComment.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EB4034"));
+            }
+            if (!UserConnected.VerifyHabilitation("100_5xCD0"))
+            {
+                StarNote1.Cursor = Cursors.No;
+                StarNote2.Cursor = Cursors.No;
+                StarNote3.Cursor = Cursors.No;
+                StarNote4.Cursor = Cursors.No;
+                StarNote5.Cursor = Cursors.No;
+            }
             ec = extraitCode;
-            List<User> listApprouvedUser = new List<User>();
+            _listApprouvedUser = new List<User>();
             OrganizeListComment();
             if (_listComments.Count == 0 || _listComments == null)
             {
@@ -57,7 +78,23 @@ namespace EPSICommunity.Views.Code
             {
                 foreach (int i in extraitCodeApprouved.ListApprouver)
                 {
-                    listApprouvedUser.Add(dataUtils.GetListUsers().Find(x => x.Id == i));
+                    _listApprouvedUser.Add(dataUtils.GetListUsers().Find(x => x.Id == i));
+                }
+                if (!UserConnected.GetUserConnected().GetIdRoles().Contains(1) || !UserConnected.GetUserConnected().GetIdRoles().Contains(2) || !UserConnected.GetUserConnected().GetIdRoles().Contains(5))
+                {
+                    this.ApprouveExtraitCodeIcon.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    if (_listApprouvedUser.Contains(UserConnected.GetUserConnected())){
+                        this.ApprouveExtraitCodeIcon.Icon = FontAwesome.WPF.FontAwesomeIcon.CheckCircle;
+                        this.ApprouveExtraitCodeIcon.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2F528F"));
+                    }
+                    else
+                    {
+                        this.ApprouveExtraitCodeIcon.Icon = FontAwesome.WPF.FontAwesomeIcon.CheckCircleOutline;
+                        this.ApprouveExtraitCodeIcon.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    }
                 }
             }
             Binding binding = new Binding
@@ -69,7 +106,8 @@ namespace EPSICommunity.Views.Code
             this.ListComments.ItemsSource = _listItemComment;
             this.ExtraitCode_Title.Text = extraitCode.Title;
             this.ExtraitCode_Description.Text = extraitCode.Description;
-            if (UserConnected.GetUserConnected().Id == ec.IdCreator)
+            List<int> idRoles = UserConnected.GetUserConnected().GetIdRoles();
+            if (UserConnected.GetUserConnected().Id == ec.IdCreator || idRoles.Contains(1) || idRoles.Contains(2) || idRoles.Contains(3) || idRoles.Contains(4) || idRoles.Contains(5))
             {
                 this.DeleteExtraitCodeIcon.Visibility = Visibility.Visible;
             }
@@ -94,7 +132,7 @@ namespace EPSICommunity.Views.Code
             this.ExtraitCode_Note.Text = extraitCode.Note.ToString();
             DisplayTotalVote(dataUtils.GetListVote().Where(x => (x.IdTarget == extraitCode.Id) && (x.TypeTarget.Equals("ExtraitCode"))).ToList().Count);
             ChangePersonalVote(extraitCode);
-            ChangeApprouverList(listApprouvedUser);
+            ChangeApprouverList(_listApprouvedUser);
             this.Picture_Creator.ImageSource = new BitmapImage
             (
                 new Uri(String.Format("pack://application:,,,/Resources/" + dataUtils.GetListUsers().Find(x => x.Id == extraitCode.IdCreator).Picture))
@@ -326,6 +364,12 @@ namespace EPSICommunity.Views.Code
 
         private void SendComment(object sender, MouseButtonEventArgs e)
         {
+            if (!UserConnected.VerifyHabilitation("100_1xCMT"))
+            {
+                MessageHabilitation.MessageNoHabilitatePersonnalized("ajouter un commentaire !");
+            }
+            else
+            {
             if (this.AddComment.Text.Equals("") || this.AddComment.Text.Equals("Écrire un commentaire..."))
             {
                 MessageBox.Show("Veuillez écrire un commentaire !", "Espi Community", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -347,7 +391,7 @@ namespace EPSICommunity.Views.Code
                         UserConnected.GetUserConnected().Id,
                         UserConnected.GetUserConnected().Nom,
                         UserConnected.GetUserConnected().Prenom,
-                        IdCommentToResponse,
+                        ec.Id,
                         "ExtraitCode",
                         this.AddComment.Text,
                         dateComment
@@ -368,6 +412,7 @@ namespace EPSICommunity.Views.Code
                 this.AddComment.Text = "Écrire un commentaire...";
                 OrganizeListComment();
                 this.ListComments.ItemsSource = _listItemComment;
+                }
             }
         }
 
@@ -479,131 +524,146 @@ namespace EPSICommunity.Views.Code
 
         private void HoverStarNote1(object sender, MouseEventArgs e)
         {
-            if (this.StarNote1.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+            if (UserConnected.VerifyHabilitation("100_5xCD0"))
             {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-            }
-            else
-            {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
-                this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                if (this.StarNote1.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                }
+                else
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                    this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                }
             }
         }
 
         private void HoverStarNot2(object sender, MouseEventArgs e)
         {
-            if (this.StarNote2.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+            if (UserConnected.VerifyHabilitation("100_5xCD0"))
             {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-            }
-            else
-            {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
-                this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                if (this.StarNote2.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                }
+                else
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                    this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                }
             }
         }
 
         private void HoverStarNote3(object sender, MouseEventArgs e)
         {
-            if (this.StarNote3.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+            if (UserConnected.VerifyHabilitation("100_5xCD0"))
             {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-            }
-            else
-            {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
-                this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                if (this.StarNote3.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                }
+                else
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                    this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                }
             }
         }
 
         private void HoverStarNote4(object sender, MouseEventArgs e)
         {
-            if (this.StarNote4.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+            if (UserConnected.VerifyHabilitation("100_5xCD0"))
             {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-            }
-            else
-            {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                if (this.StarNote4.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                }
+                else
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.StarOutline;
+                }
             }
         }
 
         private void HoverStarNote5(object sender, MouseEventArgs e)
         {
-            if (this.StarNote5.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+            if (UserConnected.VerifyHabilitation("100_5xCD0"))
             {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-            }
-            else
-            {
-                this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
-                this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
-                this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                if (this.StarNote5.Foreground == new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")))
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                }
+                else
+                {
+                    this.StarNote1.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote2.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote3.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote4.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote5.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+                    this.StarNote1.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote2.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote3.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote4.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                    this.StarNote5.Icon = FontAwesome.WPF.FontAwesomeIcon.Star;
+                }
             }
         }
 
@@ -630,22 +690,29 @@ namespace EPSICommunity.Views.Code
 
         private void ConfirmVote(int note)
         {
-            Vote ExistingVote = dataUtils.GetListVote().Find(x =>
-                (x.IdTarget == ec.Id) &&
-                (x.TypeTarget.Equals("ExtraitCode")) &&
-                (x.IdVoter == UserConnected.GetUserConnected().Id)
-            );
-            if (ExistingVote == null)
+            if (!UserConnected.VerifyHabilitation("100_5xCD0"))
             {
-                dataUtils.AddVote(ec.Id, "ExtraitCode", UserConnected.GetUserConnected().Id, note);
+                MessageHabilitation.MessageNoHabilitatePersonnalized("à noter un extrait de code !");
             }
             else
             {
-                ExistingVote.Note = note;
+                Vote ExistingVote = dataUtils.GetListVote().Find(x =>
+                    (x.IdTarget == ec.Id) &&
+                    (x.TypeTarget.Equals("ExtraitCode")) &&
+                    (x.IdVoter == UserConnected.GetUserConnected().Id)
+                );
+                if (ExistingVote == null)
+                {
+                    dataUtils.AddVote(ec.Id, "ExtraitCode", UserConnected.GetUserConnected().Id, note);
+                }
+                else
+                {
+                    ExistingVote.Note = note;
+                }
+                ec.CalculNote();
+                this.ExtraitCode_Note.Text = ec.Note.ToString();
+                DisplayTotalVote(dataUtils.GetListVote().Where(x => (x.IdTarget == ec.Id) && (x.TypeTarget.Equals("ExtraitCode"))).ToList().Count);
             }
-            ec.CalculNote();
-            this.ExtraitCode_Note.Text = ec.Note.ToString();
-            DisplayTotalVote(dataUtils.GetListVote().Where(x => (x.IdTarget == ec.Id) && (x.TypeTarget.Equals("ExtraitCode"))).ToList().Count);
         }
 
         private void ClickStarNote1(object sender, MouseButtonEventArgs e)
@@ -675,18 +742,25 @@ namespace EPSICommunity.Views.Code
 
         private void DeleteExtraitCode(object sender, RoutedEventArgs e)
         {
-            dataUtils.RemoveExtraitCode(ec.Id);
-            TextBlock NoExtraitText = new TextBlock
+            if (!UserConnected.VerifyHabilitation("100_4xCD0"))
             {
-                Text = "Aucun extrait à afficher...",
-                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")),
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Name = "NoExtraitText"
-            };
-            ((ListView)((Grid)((Grid)((Grid)this.Parent).Parent).Children[0]).Children[3]).ItemsSource = dataUtils.GetListExtraitsCode().Cast<ExtraitCode>().OrderBy(x => x.Date_Creation).ToList();
-            ((Grid)this.Parent).Children.Add(NoExtraitText);
-            ((Grid)this.Parent).Children.Remove(this);
+                MessageHabilitation.MessageNoHabilitatePersonnalized("supprimer l'extrait de code !");
+            }
+            else
+            {
+                dataUtils.RemoveExtraitCode(ec.Id);
+                TextBlock NoExtraitText = new TextBlock
+                {
+                    Text = "Aucun extrait à afficher...",
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151")),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Name = "NoExtraitText"
+                };
+                ((ListView)((Grid)((Grid)((Grid)this.Parent).Parent).Children[0]).Children[3]).ItemsSource = dataUtils.GetListExtraitsCode().Cast<ExtraitCode>().OrderBy(x => x.Date_Creation).ToList();
+                ((Grid)this.Parent).Children.Add(NoExtraitText);
+                ((Grid)this.Parent).Children.Remove(this);
+            }
         }
 
         private void HoverFavoris(object sender, MouseEventArgs e)
@@ -701,20 +775,27 @@ namespace EPSICommunity.Views.Code
 
         private void AddToFavoris(object sender, RoutedEventArgs e)
         {
-            Favoris isFavoris = dataUtils.GetListFavoris().Find(x =>
-                (x.IdTarget == ec.Id) &&
-                (x.IdUser == UserConnected.GetUserConnected().Id) &&
-                (x.TypeTarget.Equals("ExtraitCode"))
-            );
-            if (isFavoris != null)
+            if (!UserConnected.VerifyHabilitation("100_1xFVS"))
             {
-                dataUtils.RemoveFavoris(ec.Id, "ExtraitCode", UserConnected.GetUserConnected().Id);
-                this.FavorisExtraitCodeIcon.Icon = FontAwesome.WPF.FontAwesomeIcon.HeartOutline;
+                MessageHabilitation.MessageNoHabilitatePersonnalized("ajouter un élément à vos favoris !");
             }
             else
             {
-                dataUtils.AddFavoris(ec.Id, "ExtraitCode", UserConnected.GetUserConnected().Id);
-                this.FavorisExtraitCodeIcon.Icon = FontAwesome.WPF.FontAwesomeIcon.Heart;
+                Favoris isFavoris = dataUtils.GetListFavoris().Find(x =>
+                    (x.IdTarget == ec.Id) &&
+                    (x.IdUser == UserConnected.GetUserConnected().Id) &&
+                    (x.TypeTarget.Equals("ExtraitCode"))
+                );
+                if (isFavoris != null)
+                {
+                    dataUtils.RemoveFavoris(ec.Id, "ExtraitCode", UserConnected.GetUserConnected().Id);
+                    this.FavorisExtraitCodeIcon.Icon = FontAwesome.WPF.FontAwesomeIcon.HeartOutline;
+                }
+                else
+                {
+                    dataUtils.AddFavoris(ec.Id, "ExtraitCode", UserConnected.GetUserConnected().Id);
+                    this.FavorisExtraitCodeIcon.Icon = FontAwesome.WPF.FontAwesomeIcon.Heart;
+                }
             }
         }
 
@@ -742,6 +823,30 @@ namespace EPSICommunity.Views.Code
             this.TextBlock_ReponseName.Visibility = Visibility.Visible;
             this.AddComment.Text = "";
             this.AddComment.Focus();
+        }
+
+        private void HoverApprouve(object sender, MouseEventArgs e)
+        {
+            this.ApprouveExtraitCodeIcon.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#515151"));
+        }
+
+        private void LostHoverApprouve(object sender, MouseEventArgs e)
+        {
+            this.ApprouveExtraitCodeIcon.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BFBFBF"));
+        }
+
+        private void ApprouveExtraitCode(object sender, MouseButtonEventArgs e)
+        {
+            if (!UserConnected.VerifyHabilitation("100_6xCD0"))
+            {
+                MessageHabilitation.MessageNoHabilitatePersonnalized("approuver l'extrait de code !");
+            }
+            else
+            {
+                if (_listApprouvedUser.Contains(UserConnected.GetUserConnected())){
+                    _listApprouvedUser.Remove(UserConnected.GetUserConnected());
+                }
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EPSICommunity.Model;
+using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.Session;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,13 +25,25 @@ namespace EPSICommunity.Views.Login
         public Login()
         {
             InitializeComponent();
+            dataUtils.SetDataUtils();
+            ErrorMessage.Visibility = Visibility.Hidden;
         }
 
         private void send_loginForm(object sender, RoutedEventArgs e)
         {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            User userToConnect = dataUtils.GetUserByMailAdress(MailAdressTextBox.Text);
+            if (userToConnect != null && PasswordTextBox.Password == userToConnect.Password)
+            {
+                UserConnected.SetUserConnected(userToConnect);
+                var mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                PasswordTextBox.Clear();
+                ErrorMessage.Visibility = Visibility.Visible;
+            }
         }
     }
 }

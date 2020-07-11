@@ -8,18 +8,19 @@ namespace EPSICommunity.Model
 {
     public class Role
     {
-        public int IdRole { get; set; }
-
+        public int Id { get; set; }
         public string Name { get; set; }
+        public List<int> ListHabilitations { get; set; }
 
 
 
         public Role() { }
 
-        public Role(int idRole, string name)
+        public Role(int id, string name, List<int> listHabilitations)
         {
-            IdRole = idRole;
+            Id = id;
             Name = name;
+            ListHabilitations = listHabilitations;
         }
     }
 }
