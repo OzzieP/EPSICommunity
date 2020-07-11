@@ -39,11 +39,19 @@ namespace EPSICommunity.Views
 
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            //ContentArea.Content = null;
-            string tagUid =  ((ImageAwesome) e.Source).Tag.ToString();
+            string tagUid = String.Empty;
+
+            if (e.Source is ImageAwesome awesome)
+                tagUid = awesome.Tag.ToString();
+            else if (e.Source is TextBlock block)
+                tagUid = block.Tag.ToString();
+
 
             switch (tagUid)
             {
+                case "PageProfil":
+                    ContentArea.Content = new Profil.Profil();
+                    break;
                 case "PageAccueil":
                     
                     break;
@@ -81,13 +89,12 @@ namespace EPSICommunity.Views
                         MessageHabilitation.MessageNoHabilitate();
                     }
                     break;
+                case "PageParametres":
+
+                    break;
             }
         }
 
-        private void btn_profil(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {

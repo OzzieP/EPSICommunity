@@ -57,7 +57,8 @@
             <Grid x:Name="nav_pnl"
                   HorizontalAlignment="Left"
                   Width="55"
-                  Background="#304561">
+                  Background="#304561"
+                  ZIndex="1">
                 <StackPanel x:Name="st_pnl">
                     <!--Grid for the Menu Toggle Button-->
                     <Grid Height="90">
@@ -70,8 +71,7 @@
                                    FontSize="18"
                                    Background="Transparent"
                                    HorizontalAlignment="Left"
-                                   VerticalAlignment="Center" 
-                                   MouseDown="btn_profil">
+                                   VerticalAlignment="Center">
                         </TextBlock>
                         <!--TOggle Button-->
                         <ToggleButton x:Name="Tgl_Btn"
@@ -122,21 +122,46 @@
                               BorderBrush="Transparent"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                        <!--Accueil-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15" 
                                       MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="UserCircleOutline" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageProfil"/>
+                                <TextBlock Text="Mon profil"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageProfil"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_profil"
+                                         Content="Mon profil"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Accueil-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" 
+                                      MouseEnter="ListViewItem_MouseEnter"
+                                      PreviewMouseLeftButtonDown="ChangePage">
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
                                 <fa:ImageAwesome Icon="Home" Height="25" Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageAccueil"/>
                                 <TextBlock Text="Accueil"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageAccueil"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -151,16 +176,17 @@
                                       Margin="0,0,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="CommentOutline" Height="25" Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageMessagerie"/>
                                 <TextBlock Text="Messagerie"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageMessagerie"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -175,18 +201,19 @@
                                       Margin="0,0,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="Code"
                                                  Height="25"
                                                  Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0" 
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageCode"/>
                                 <TextBlock Text="Code"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageCode"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -201,16 +228,17 @@
                                       Margin="0,0,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="LightbulbOutline" Height="25" Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageIdees"/>
                                 <TextBlock Text="Idées"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageIdees"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -225,16 +253,17 @@
                                       Margin="0,2,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="Laptop" Height="25" Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageIDEs"/>
                                 <TextBlock Text="IDEs"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageIDEs"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -249,16 +278,17 @@
                                       Margin="0,0,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="Search" Height="20" Width="18"
                                                  Foreground="#FFF"
                                                  Margin="13,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageRecherche"/>
                                 <TextBlock Text="Recherche"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageRecherche"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -273,16 +303,17 @@
                                       Margin="0,0,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="StarOutline" Height="25" Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageFavoris"/>
                                 <TextBlock Text="Favoris"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageFavoris"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -297,16 +328,17 @@
                                       Margin="0,0,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="IdBadge" Height="25" Width="25"
                                                  Foreground="#FFF"
                                                  Margin="8,0,0,0"
-                                                 PreviewMouseLeftButtonDown="ChangePage"
                                                  Tag="PageAdministration"/>
                                 <TextBlock Text="Administration" 
                                            Margin="25,0,0,0" 
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageAdministration"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
@@ -321,14 +353,17 @@
                                       Margin="0,130,0,15"
                                       MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
-                                        Width="230">
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
                                 <fa:ImageAwesome Icon="Cog" Height="25" Width="25"
                                                  Foreground="#FFF"
-                                                 Margin="8,0,0,0"/>
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageParametres"/>
                                 <TextBlock Text="Paramètres"
                                            Margin="25,0,0,0"
                                            Height="14px"
-                                           Foreground="#FFF" />
+                                           Foreground="#FFF"
+                                           Tag="PageParametres"/>
                             </StackPanel>
                             <!--Tooltip-->
                             <ListViewItem.ToolTip>
