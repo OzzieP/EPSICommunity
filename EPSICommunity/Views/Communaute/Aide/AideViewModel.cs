@@ -64,6 +64,28 @@ namespace EPSICommunity.Views.Communaute.Aide
             }
         }
 
+        //private bool _showFormUpdateDoc;
+        //public bool ShowFormUpdateDoc
+        //{
+        //    get { return _showFormUpdateDoc; }
+        //    set
+        //    {
+        //        _showFormUpdateDoc = value;
+        //        NotifyPropertyChanged("ShowFormUpdateDoc");
+        //    }
+        //}
+
+        private bool _showFormUpdateDoc;
+        public bool ShowFormUpdateDoc
+        {
+            get { return _showFormUpdateDoc; }
+            set
+            {
+                _showFormUpdateDoc = value;
+                NotifyPropertyChanged("ShowFormUpdateDoc");
+            }
+        }
+
         private List<String> _listeLanguage;
 
         public ICollectionView ListeLanguage { get; set; }
@@ -80,26 +102,32 @@ namespace EPSICommunity.Views.Communaute.Aide
             }
         }
 
-
+        private List<Aides> _listeFiltered;
 
         public AideViewModel()
         {
+            _listeFiltered = new List<Aides>();
+
             _listeAides = new List<Aides>();
 
             _listeAides = new List<Aides>
             {
-                new Aides { Nom = "WPF" , Description = "Matthieu est nul"},
-                new Aides { Nom = "WPF" , Description = "Brendan"}
+                new Aides { Nom = "WPF" , Description = "Matthieu est doué en SQL", Language = "SQL"},
+                new Aides { Nom = "WPF" , Description = "Brendan est fort en C#", Language = "C#"},
+                new Aides { Nom = "testing" , Description = "Pour l'environement test, il est conseiller d'utiliser le package UnitTest en C#", Language = "Testing"}
             };
 
             ListeAides = CollectionViewSource.GetDefaultView(_listeAides);
 
             _listeLanguage = new List<string>
             {
-                "c#","java","sql"
+                "C#","Java","SQL","Testing"
             };
 
             ListeLanguage = CollectionViewSource.GetDefaultView(_listeLanguage);
+
+            ListeAides.Refresh();
+            ListeLanguage.Refresh();
         }
 
         public void AddAide()

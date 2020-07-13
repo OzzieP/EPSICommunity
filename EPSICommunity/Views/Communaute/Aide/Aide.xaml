@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EPSICommunity.Views.Communaute.Aide.Aide"
+<UserControl x:Class="EPSICommunity.Views.Communaute.Aide.Aide"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="200*"/>
                 <ColumnDefinition Width="600*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15*"/>
@@ -28,8 +28,8 @@
                         </Separator.RenderTransform>
                     </Separator>
 
-                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}"/>
-                    
+                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}" DropDownClosed="ComboBoxFilter_DropDownClosed"/>
+
                 </StackPanel>
 
                 <StackPanel Grid.Row="1"   Orientation="Vertical">
@@ -42,7 +42,7 @@
                     <Button  Margin="2" Content="Ajouter une aide" Click="ButtonAdd_Click"/>
                     <Button  Margin="2" Content="Supprimer une aide" Click="ButtonDelete_Click"/>
                 </StackPanel>
-                
+
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30*"/>
@@ -59,6 +59,19 @@
                         <TextBox  Grid.Row="2" materialDesign:HintAssist.Hint="Description de l'aide "  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedDescription}"/>
                         <Button  Grid.Row="3"  Margin="2" Content="Valider" Click="ButtonAddAide_Click"/>
                     </Grid>
+
+                    <Grid Grid.Row="0" Visibility="{Binding ShowFormUpdateDoc, Converter={StaticResource TrueToVisible}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                        </Grid.RowDefinitions>
+                        <TextBox  Grid.Row="1" materialDesign:HintAssist.Hint="Modification du Nom de l'aide  " Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedNom}"/>
+                        <TextBox  Grid.Row="2" materialDesign:HintAssist.Hint="Modification Description de l'aide "  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedDescription}"/>
+                        <Button  Grid.Row="3"  Margin="2" Content="Modifier" Click="ButtonUpdateAide_Click"/>
+                        <!--<Button  Grid.Row="3"  Margin="2" Content="Valider" Click="ButtonAddAide_Click"/>-->
+                    </Grid>
                 </Grid>
             </Grid>
 
@@ -73,6 +86,5 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-
     </Grid>
 </UserControl>
