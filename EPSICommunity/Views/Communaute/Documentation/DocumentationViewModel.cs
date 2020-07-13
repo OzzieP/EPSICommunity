@@ -50,7 +50,7 @@ namespace EPSICommunity.Views.Communaute.Documentation
 
         private String _selectedLink;
         public String SelectedLink
-        {   
+        {
 
             get { return _selectedLink; }
             set
@@ -92,7 +92,7 @@ namespace EPSICommunity.Views.Communaute.Documentation
 
             _listeLanguage = new List<string>
             {
-                "c#","java","sql"
+                "c#","java","sql",
             };
 
             ListeLanguage = CollectionViewSource.GetDefaultView(_listeLanguage);
