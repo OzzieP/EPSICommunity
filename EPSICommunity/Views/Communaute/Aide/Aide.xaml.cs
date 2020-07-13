@@ -40,5 +40,10 @@ namespace EPSICommunity.Views.Communaute.Aide
         {
             _viewModel.ShowFormDoc = true;
         }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.DeleteAide();
+        }
     }
 }

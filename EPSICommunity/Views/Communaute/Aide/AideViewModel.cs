@@ -18,8 +18,8 @@ namespace EPSICommunity.Views.Communaute.Aide
         public ICollectionView ListeAides { get; set; }
 
 
-        private String _selectedAides;
-        public String SelectedAides
+        private Aides _selectedAides;
+        public Aides SelectedAides
         {
             get { return _selectedAides; }
             set
@@ -112,6 +112,13 @@ namespace EPSICommunity.Views.Communaute.Aide
 
             _listeAides.Add(Aide);
             ListeAides.Refresh();
+        }
+
+        public void DeleteAide()
+        {
+            _listeAides.Remove(SelectedAides);
+            ListeAides.Refresh();
+
         }
     }
 }

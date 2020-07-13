@@ -72,6 +72,17 @@ namespace EPSICommunity.Views.Communaute.Documentation
             }
         }
 
+        private Docs _selectedDocumentation;
+        public Docs SelectedDocumentation
+        {
+            get { return _selectedDocumentation; }
+            set
+            {
+                _selectedDocumentation = value;
+                NotifyPropertyChanged("SelectedDocumentation");
+            }
+        }
+
 
         public DocumentationViewModel()
         {
@@ -92,7 +103,7 @@ namespace EPSICommunity.Views.Communaute.Documentation
 
             _listeLanguage = new List<string>
             {
-                "c#","java","sql",
+                "C#","Java","Sql","Python"
             };
 
             ListeLanguage = CollectionViewSource.GetDefaultView(_listeLanguage);
@@ -113,6 +124,13 @@ namespace EPSICommunity.Views.Communaute.Documentation
             };
 
             _listeDocumentation.Add(Doc); //ajout a la site privé 
+            ListeDocumentation.Refresh();
+
+        }
+
+        public void DeleteDocumentation()
+        {
+            _listeDocumentation.Remove(SelectedDocumentation);
             ListeDocumentation.Refresh();
 
         }
