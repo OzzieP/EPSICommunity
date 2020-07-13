@@ -334,7 +334,7 @@
                                                  Foreground="#FFF"
                                                  Margin="13,0,0,0"
                                                  Tag="PageDocumentation"/>
-                                <TextBlock Text="Aide"
+                                <TextBlock Text="Documentation"
                                            Margin="25,0,0,0"
                                            Height="14px"
                                            Foreground="#FFF"
