@@ -12,5 +12,6 @@ namespace EPSICommunity.Views.Communaute.Aide
 
         public String Description { get; set; }
 
+        public string Language { get; set; }
     }
 }
