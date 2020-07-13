@@ -28,7 +28,7 @@
                         </Separator.RenderTransform>
                     </Separator>
 
-                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}" DropDownClosed="ComboBoxFilter_DropDownClosed"/>
+                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}"/>
 
                 </StackPanel>
 
@@ -69,8 +69,6 @@
                         </Grid.RowDefinitions>
                         <TextBox  Grid.Row="1" materialDesign:HintAssist.Hint="Modification du Nom de l'aide  " Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedNom}"/>
                         <TextBox  Grid.Row="2" materialDesign:HintAssist.Hint="Modification Description de l'aide "  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedDescription}"/>
-                        <Button  Grid.Row="3"  Margin="2" Content="Modifier" Click="ButtonUpdateAide_Click"/>
-                        <!--<Button  Grid.Row="3"  Margin="2" Content="Valider" Click="ButtonAddAide_Click"/>-->
                     </Grid>
                 </Grid>
             </Grid>
