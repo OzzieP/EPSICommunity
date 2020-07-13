@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -145,6 +145,16 @@
       <DependentUpon>ExtraitCodeItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converters.cs" />
+    <Compile Include="Views\Communaute\Aide\Aide.xaml.cs">
+      <DependentUpon>Aide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Communaute\Aide\Aides.cs" />
+    <Compile Include="Views\Communaute\Aide\AideViewModel.cs" />
+    <Compile Include="Views\Communaute\Documentation\Docs.cs" />
+    <Compile Include="Views\Communaute\Documentation\Documentation.xaml.cs">
+      <DependentUpon>Documentation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Communaute\Documentation\DocumentationViewModel.cs" />
     <Compile Include="Views\Administration\Administration.xaml.cs">
       <DependentUpon>Administration.xaml</DependentUpon>
     </Compile>
@@ -183,6 +193,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Communaute\Aide\Aide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Communaute\Documentation\Documentation.xaml">
     <Page Include="Views\Administration\Roles\GestionRoles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

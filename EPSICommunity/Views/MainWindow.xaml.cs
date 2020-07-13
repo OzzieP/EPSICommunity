@@ -1,4 +1,4 @@
-﻿using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.data;
 using EPSICommunity.Utils.Session;
 using EPSICommunity.Views.Code;
 using System;
@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EPSICommunity.Views.Administration;
 using EPSICommunity.Views.Messagerie;
+using EPSICommunity.Views.Communaute.Aide;
 using FontAwesome.WPF;
 using EPSICommunity.Utils.Habilitation;
 
@@ -46,7 +47,6 @@ namespace EPSICommunity.Views
             else if (e.Source is TextBlock block)
                 tagUid = block.Tag.ToString();
 
-
             switch (tagUid)
             {
                 case "PageProfil":
@@ -58,6 +58,8 @@ namespace EPSICommunity.Views
                 case "PageMessagerie":
                     ContentArea.Content = new MessagerieHome();
                     break;
+                case "PageAide":
+                    ContentArea.Content = new Aide();
                 case "PageCode":
                     ContentArea.Content = new ExtraitCodeHome();
                     break;

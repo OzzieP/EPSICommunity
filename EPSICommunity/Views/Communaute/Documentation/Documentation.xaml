@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="EPSICommunity.Views.Communaute.Documentation.Doc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EPSICommunity.Views.Communaute.Documentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             MinHeight="450" MinWidth="800" Background="White">
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="600*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <TextBlock Text="Filtres"/>
+                    <Separator>
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="2"/>
+                        </Separator.RenderTransform>
+                    </Separator>
+
+                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}"/>
+                    <Button  Margin="2" Content="Valider" Click="ButtonFilter_Click"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="30*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel   Orientation="Vertical">
+                        <TextBlock Text="Gerer"/>
+                        <Separator>
+                            <Separator.RenderTransform>
+                                <ScaleTransform ScaleY="2"/>
+                            </Separator.RenderTransform>
+                        </Separator>
+                        <Button  Margin="2" Content="Ajouter une documentation" Click="ButtonAdd_Click"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Visibility="{Binding ShowFormDoc, Converter={StaticResource TrueToVisible}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox  Grid.Row="0" materialDesign:HintAssist.Hint="Titre de la documentation " Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedTitre}"/>
+                        <TextBox  Grid.Row="1" materialDesign:HintAssist.Hint="Lien documentation "  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedLink}"/>
+                        <ComboBox  Grid.Row ="2" materialDesign:HintAssist.Hint="Language " SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}"/>
+                        <Button  Grid.Row="3"  Margin="2" Content="Valider" Click="ButtonAddDoc_Click"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <ListBox Grid.Column="1" ItemsSource="{Binding ListeDocumentation}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Titre}" />
+                            <TextBlock Text="{ Binding Link }"/>
+                            <TextBlock Text="{ Binding Language }"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+    </Grid>
+</UserControl>
