@@ -61,6 +61,9 @@ namespace EPSICommunity.Views
                 case "PageAide":
                     ContentArea.Content = new Aide();
                     break;
+                case "PageDocumentation":
+                    ContentArea.Content = new Communaute.Documentation.Doc();
+                    break;
                 case "PageCode":
                     ContentArea.Content = new ExtraitCodeHome();
                     break;

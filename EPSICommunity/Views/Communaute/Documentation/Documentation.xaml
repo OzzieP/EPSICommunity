@@ -38,6 +38,17 @@
                         <RowDefinition Height="30*"/>
                     </Grid.RowDefinitions>
 
+
+                    <!--<StackPanel   Orientation="Vertical">
+                        <TextBlock Text="Gerer"/>
+                        <Separator>
+                            <Separator.RenderTransform>
+                                <ScaleTransform ScaleY="2"/>
+                            </Separator.RenderTransform>
+                        </Separator>
+                        <Button  Margin="2" Content="Modifier " Click="ButtonAdd_Click"/>
+                    </StackPanel>-->
+
                     <StackPanel   Orientation="Vertical">
                         <TextBlock Text="Gerer"/>
                         <Separator>
@@ -46,6 +57,8 @@
                             </Separator.RenderTransform>
                         </Separator>
                         <Button  Margin="2" Content="Ajouter une documentation" Click="ButtonAdd_Click"/>
+                        <!--<Button  Margin="2" Content="Modifier " Click="ButtonUpdate_Click"></Button>-->
+
                     </StackPanel>
 
                     <Grid Grid.Row="1" Visibility="{Binding ShowFormDoc, Converter={StaticResource TrueToVisible}}">

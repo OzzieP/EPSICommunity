@@ -323,6 +323,31 @@
                             </ListViewItem.ToolTip>
                         </ListViewItem>
 
+                        <!--Documentation-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="Book" Height="20" Width="18"
+                                                 Foreground="#FFF"
+                                                 Margin="13,0,0,0"
+                                                 Tag="PageDocumentation"/>
+                                <TextBlock Text="Aide"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageDocumentation"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_doc"
+                                         Content="Documentation"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
                         <!--Favoris-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15"
