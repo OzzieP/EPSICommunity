@@ -298,6 +298,31 @@
                             </ListViewItem.ToolTip>
                         </ListViewItem>
 
+                        <!--Aide-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="QuestionCircleOutline" Height="20" Width="18"
+                                                 Foreground="#FFF"
+                                                 Margin="13,0,0,0"
+                                                 Tag="PageAide"/>
+                                <TextBlock Text="Aide"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageAide"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_help"
+                                         Content="Aide"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
                         <!--Favoris-->
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0,0,0,15"

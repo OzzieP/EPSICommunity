@@ -60,6 +60,7 @@ namespace EPSICommunity.Views
                     break;
                 case "PageAide":
                     ContentArea.Content = new Aide();
+                    break;
                 case "PageCode":
                     ContentArea.Content = new ExtraitCodeHome();
                     break;
@@ -109,6 +110,7 @@ namespace EPSICommunity.Views
                 tt_ideas.Visibility = Visibility.Collapsed;
                 tt_ide.Visibility = Visibility.Collapsed;
                 tt_search.Visibility = Visibility.Collapsed;
+                tt_help.Visibility = Visibility.Collapsed;
                 tt_favoris.Visibility = Visibility.Collapsed;
                 tt_settings.Visibility = Visibility.Collapsed;
             }
@@ -120,6 +122,7 @@ namespace EPSICommunity.Views
                 tt_ideas.Visibility = Visibility.Visible;
                 tt_ide.Visibility = Visibility.Visible;
                 tt_search.Visibility = Visibility.Visible;
+                tt_help.Visibility = Visibility.Visible;
                 tt_favoris.Visibility = Visibility.Visible;
                 tt_settings.Visibility = Visibility.Visible;
             }
