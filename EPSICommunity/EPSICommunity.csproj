@@ -198,6 +198,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Communaute\Documentation\Documentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Administration\Roles\GestionRoles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
