@@ -1,4 +1,6 @@
-﻿using EPSICommunity.Views.Communaute.Aide;
+using EPSICommunity.Utils.data;
+using EPSICommunity.Utils.Session;
+using EPSICommunity.Views.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EPSICommunity.Views.Administration;
+using EPSICommunity.Views.Messagerie;
+using EPSICommunity.Views.Communaute.Aide;
+using FontAwesome.WPF;
+using EPSICommunity.Utils.Habilitation;
 
 namespace EPSICommunity.Views
 {
@@ -33,27 +40,63 @@ namespace EPSICommunity.Views
 
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            //GridBodyContent.Children.Clear();
-            string tagUid =  ((Button) e.Source).Tag.ToString();
+            string tagUid = String.Empty;
+
+            if (e.Source is ImageAwesome awesome)
+                tagUid = awesome.Tag.ToString();
+            else if (e.Source is TextBlock block)
+                tagUid = block.Tag.ToString();
 
             switch (tagUid)
             {
-                case "PageCommunity":
+                case "PageProfil":
+                    ContentArea.Content = new Profil.Profil();
                     break;
-                case "PageTools":
+                case "PageAccueil":
+                    
                     break;
-                case "PageDocumentation":
+                case "PageMessagerie":
+                    ContentArea.Content = new MessagerieHome();
                     break;
-                case "PageHelp":
+                case "PageAide":
                     ContentArea.Content = new Aide();
+                case "PageCode":
+                    ContentArea.Content = new ExtraitCodeHome();
+                    break;
+                case "PageIdees":
+
+                    break;
+                case "PageIDEs":
+
+                    break;
+                case "PageRecherche":
+
+                    break;
+                case "PageFavoris":
+
+                    break;
+                case "PageAdministration":
+                    List<int> idRoles = UserConnected.GetUserConnected().GetIdRoles();
+                    if (idRoles.Contains(5) || idRoles.Contains(4) || idRoles.Contains(3) || idRoles.Contains(2) || idRoles.Contains(1))
+                    {
+                        if (UserConnected.VerifyHabilitations()) {
+                            ContentArea.Content = new Administration.Administration();
+                        }
+                        else {
+                            MessageHabilitation.MessageNoHabilitate();
+                        }
+                    }
+                    else
+                    {
+                        MessageHabilitation.MessageNoHabilitate();
+                    }
+                    break;
+                case "PageParametres":
+
                     break;
             }
         }
 
-        private void btn_profil(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {

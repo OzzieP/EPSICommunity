@@ -1,4 +1,4 @@
-﻿<Window x:Class="EPSICommunity.Views.MainWindow"
+<Window x:Class="EPSICommunity.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,378 +18,405 @@
         WindowState="Maximized" 
         MinHeight="500" 
         MinWidth="800">
-  <Window.Resources>
-    <!--Toggle Button Style Template-->
-    <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type ToggleButton}">
-            <Border x:Name="border"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Background="{TemplateBinding Background}"
-                    SnapsToDevicePixels="True">
-            </Border>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <!--Tooltip Style Template-->
-    <Style TargetType="ToolTip" x:Key="tt_style">
-      <Setter Property="Placement" Value="Right" />
-      <Setter Property="Height" Value="40"/>
-      <Setter Property="Width" Value="100"/>
-      <Setter Property="Margin" Value="20,0,0,0"/>
-      <Setter Property="Background" Value="#4A5668"/>
-      <Setter Property="BorderBrush" Value="Transparent"/>
-      <Setter Property="Foreground" Value="#FFF"/>
-      <Setter Property="FontFamily" Value="Arial"/>
-      <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
-      <Setter Property="HorizontalOffset" Value="15"/>
-      <Setter Property="VerticalOffset" Value="6"/>
-      <Setter Property="HasDropShadow" Value="True"/>
-      <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    </Style>
-  </Window.Resources>
-    <Grid>
-      <!-- Background color -->
-      <Grid Background="#3e3e3e">
-        <!--// Navigation Panel-->
-        <Grid x:Name="nav_pnl"
-              HorizontalAlignment="Left"
-              Width="55"
-              Background="#304561">
-          <StackPanel x:Name="st_pnl">
-            <!--Grid for the Menu Toggle Button-->
-            <Grid Height="90">
-              <!--Menu title Profil-->
-              <TextBlock Grid.Row="1"
-                         Grid.Column="0"
-                         Text="Nicolas CAZIN"
-                         Margin="60,-20,0,0"
-                         Foreground="#FFF"
-                         FontSize="18"
-                         Background="Transparent"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Center" MouseDown="btn_profil">
-              </TextBlock>
-              <!--TOggle Button-->
-              <ToggleButton x:Name="Tgl_Btn"
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            Margin="0,10,0,30"
-                            Height="50"
-                            Width="50"
-                            BorderThickness="0">
-                <!--Toggle button default background image-->
-                <ToggleButton.Foreground>
-                    <ImageBrush ImageSource="pack://application:,,,/Resources/Images/logo.png"/>
-                </ToggleButton.Foreground>
-
-                <!--Toggle Button - Checked, Unchecked events-->
-                <ToggleButton.Triggers>
-                  <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                    <BeginStoryboard>
-                      <Storyboard x:Name="HideStackPanel">
-                        <DoubleAnimation Storyboard.TargetName="nav_pnl"
-                                         Storyboard.TargetProperty="Width"
-                                         BeginTime="0:0:0"
-                                         From="190" To="55"
-                                         Duration="0:0:0.1"
-                                                >
-                        </DoubleAnimation>
-                      </Storyboard>
-                    </BeginStoryboard>
-                  </EventTrigger>
-                  <EventTrigger RoutedEvent="ToggleButton.Checked">
-                    <BeginStoryboard>
-                      <Storyboard x:Name="ShowStackPanel">
-                        <DoubleAnimation Storyboard.TargetName="nav_pnl"
-                                         Storyboard.TargetProperty="Width"
-                                         BeginTime="0:0:0"
-                                         From="55" To="190"
-                                         Duration="0:0:0.2">
-                        </DoubleAnimation>
-                      </Storyboard>
-                    </BeginStoryboard>
-                  </EventTrigger>
-                </ToggleButton.Triggers>
-              </ToggleButton>
-            </Grid>
-            <!--ListView With menu list item-->
-            <ListView x:Name="LV"
-                      Background="Transparent"
-                      BorderBrush="Transparent"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-
-              <!--Accueil-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="Home" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="Accueil"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_accueil"
-                           Content="Accueil"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-              <!--Messagerie-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,0,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="CommentOutline" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="Messagerie"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_messagerie"
-                           Content="Messagerie"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-              <!--Code-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,0,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="Code" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="Code"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_code"
-                           Content="Code"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-              <!--Idees-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,0,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="LightbulbOutline" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="Idées"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_ideas"
-                           Content="Idées"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-              <!--IDE-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,2,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="Laptop" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="IDEs"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_ide"
-                           Content="IDEs"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-              <!--Recherche-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,0,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="Search" Height="20" Width="18"
-                                   Foreground="#FFF"
-                                   Margin="13,0,0,0"/>
-                  <TextBlock Text="Recherche"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_search"
-                           Content="Recherche"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-              <!--Favoris-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,0,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="StarOutline" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="Favoris"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_favoris"
-                           Content="Favoris"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-                      
-              <!--Settings-->
-              <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,130,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                <StackPanel Orientation="Horizontal"
-                            Width="230">
-                  <fa:ImageAwesome Icon="Cog" Height="25" Width="25"
-                                   Foreground="#FFF"
-                                   Margin="8,0,0,0"/>
-                  <TextBlock Text="Paramètres"
-                             Margin="25,0,0,0"
-                             Height="14px"
-                             Foreground="#FFF" />
-                </StackPanel>
-                <!--Tooltip-->
-                <ListViewItem.ToolTip>
-                  <ToolTip x:Name="tt_settings"
-                           Content="Paramètres"
-                           Style="{StaticResource tt_style}"/>
-                </ListViewItem.ToolTip>
-              </ListViewItem>
-
-                        <ListViewItem HorizontalAlignment="Left"
-                            Margin="0,130,0,15"
-                            MouseEnter="ListViewItem_MouseEnter">
-                           
-                            <Button Tag="PageHelp" Grid.Row="1" Grid.Column="3" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-                            <TextBlock Text="Help" FontWeight="Bold" FontSize="16" />
-                        </Button>
-                        </ListViewItem>
-
-
-                        <!--Listview items style template-->
-              <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                  <Setter Property="Template">
-                    <Setter.Value>
-                      <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Border x:Name="Bd"
-                                Height="28"
-                                BorderBrush="{TemplateBinding BorderBrush}"
+    <Window.Resources>
+        <!--Toggle Button Style Template-->
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}"
                                 SnapsToDevicePixels="True">
-                          <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                        <ControlTemplate.Triggers>
-                          <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                              <Condition Property="IsMouseOver"
-                                         Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background"
-                                    TargetName="Bd"
-                                    Value="#404D5B"/>
-                            <Setter Property="BorderBrush"
-                                    TargetName="Bd"
-                                    Value="#404D5B"/>
-                          </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                      </ControlTemplate>
-                    </Setter.Value>
-                  </Setter>
-                </Style>
-              </ListView.ItemContainerStyle>
-            </ListView>
-          </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Tooltip Style Template-->
+        <Style TargetType="ToolTip" x:Key="tt_style">
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFF"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <!-- Background color -->
+        <Grid Background="#3e3e3e">
+            <!--// Navigation Panel-->
+            <Grid x:Name="nav_pnl"
+                  HorizontalAlignment="Left"
+                  Width="55"
+                  Background="#304561"
+                  ZIndex="1">
+                <StackPanel x:Name="st_pnl">
+                    <!--Grid for the Menu Toggle Button-->
+                    <Grid Height="90">
+                        <!--Menu title Profil-->
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="Nicolas CAZIN"
+                                   Margin="60,-20,0,0"
+                                   Foreground="#FFF"
+                                   FontSize="18"
+                                   Background="Transparent"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center">
+                        </TextBlock>
+                        <!--TOggle Button-->
+                        <ToggleButton x:Name="Tgl_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="0,10,0,30"
+                                      Height="50"
+                                      Width="50"
+                                      BorderThickness="0">
+                            <!--Toggle button default background image-->
+                            <ToggleButton.Foreground>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/logo.png"/>
+                            </ToggleButton.Foreground>
+
+                            <!--Toggle Button - Checked, Unchecked events-->
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideStackPanel">
+                                            <DoubleAnimation Storyboard.TargetName="nav_pnl"
+                                                             Storyboard.TargetProperty="Width"
+                                                             BeginTime="0:0:0"
+                                                             From="190" To="55"
+                                                             Duration="0:0:0.1">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowStackPanel">
+                                            <DoubleAnimation Storyboard.TargetName="nav_pnl"
+                                                             Storyboard.TargetProperty="Width"
+                                                             BeginTime="0:0:0"
+                                                             From="55" To="190"
+                                                             Duration="0:0:0.2">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                    </Grid>
+                    <!--ListView With menu list item-->
+                    <ListView x:Name="LV"
+                              Background="Transparent"
+                              BorderBrush="Transparent"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" 
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="UserCircleOutline" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageProfil"/>
+                                <TextBlock Text="Mon profil"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageProfil"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_profil"
+                                         Content="Mon profil"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Accueil-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" 
+                                      MouseEnter="ListViewItem_MouseEnter"
+                                      PreviewMouseLeftButtonDown="ChangePage">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <fa:ImageAwesome Icon="Home" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageAccueil"/>
+                                <TextBlock Text="Accueil"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageAccueil"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_accueil"
+                                         Content="Accueil"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Messagerie-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="CommentOutline" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageMessagerie"/>
+                                <TextBlock Text="Messagerie"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageMessagerie"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_messagerie"
+                                         Content="Messagerie"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Code-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="Code"
+                                                 Height="25"
+                                                 Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0" 
+                                                 Tag="PageCode"/>
+                                <TextBlock Text="Code"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageCode"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_code"
+                                         Content="Code"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Idees-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="LightbulbOutline" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageIdees"/>
+                                <TextBlock Text="Idées"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageIdees"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_ideas"
+                                         Content="Idées"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--IDE-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,2,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="Laptop" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageIDEs"/>
+                                <TextBlock Text="IDEs"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageIDEs"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_ide"
+                                         Content="IDEs"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Recherche-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="Search" Height="20" Width="18"
+                                                 Foreground="#FFF"
+                                                 Margin="13,0,0,0"
+                                                 Tag="PageRecherche"/>
+                                <TextBlock Text="Recherche"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageRecherche"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_search"
+                                         Content="Recherche"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Favoris-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="StarOutline" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageFavoris"/>
+                                <TextBlock Text="Favoris"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageFavoris"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_favoris"
+                                         Content="Favoris"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Administration-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="IdBadge" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageAdministration"/>
+                                <TextBlock Text="Administration" 
+                                           Margin="25,0,0,0" 
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageAdministration"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_administration"
+                                         Content="Administration"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Settings-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,130,0,15"
+                                      MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230"
+                                        PreviewMouseLeftButtonDown="ChangePage">
+                                <fa:ImageAwesome Icon="Cog" Height="25" Width="25"
+                                                 Foreground="#FFF"
+                                                 Margin="8,0,0,0"
+                                                 Tag="PageParametres"/>
+                                <TextBlock Text="Paramètres"
+                                           Margin="25,0,0,0"
+                                           Height="14px"
+                                           Foreground="#FFF"
+                                           Tag="PageParametres"/>
+                            </StackPanel>
+                            <!--Tooltip-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_settings"
+                                         Content="Paramètres"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--Listview items style template-->
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Border x:Name="Bd"
+                                                    Height="28"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsMouseOver"
+                                                                   Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B"/>
+                                                    <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B"/>
+                                                </MultiTrigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="55, 0, 0, 0">
+                <ContentControl Name="ContentArea"/>
+            </Grid>
+
         </Grid>
-        <Grid Name="Body"
-              Margin="55,0,0,0">
-                <Grid Grid.Row="1">
-                    <ContentControl Name="ContentArea"/>
-                </Grid>
-
-                <!--<Grid Name="GridBodyContent" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="100*"/>
-              <ColumnDefinition Width="200*"/>
-              <ColumnDefinition Width="200*"/>
-              <ColumnDefinition Width="200*"/>
-              <ColumnDefinition Width="100*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="50*"/>
-              <RowDefinition Height="150*"/>
-              <RowDefinition Height="50*"/>
-              <RowDefinition Height="50*"/>
-            </Grid.RowDefinitions>
-
-            <Button Tag="PageCommunity" Grid.Row="1" Grid.Column="1" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-              <TextBlock Text="COMMUNAUTÉ" FontWeight="Bold" FontSize="16" />
-            </Button>
-
-            <Button Tag="PageTools" Grid.Row="1" Grid.Column="2" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-              <TextBlock Text="OUTILS" FontWeight="Bold" FontSize="16" />
-            </Button>
-
-            <Button Tag="PageDocumentation" Grid.Row="1" Grid.Column="3" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5" Click="ChangePage">
-              <TextBlock Text="DOCUMENTATION" FontWeight="Bold" FontSize="16" />
-            </Button>
-
-            <Button Tag="PageHelp" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Height="Auto"
-                    Style="{StaticResource MaterialDesignRaisedButton}" md:ButtonAssist.CornerRadius="5">
-              <TextBlock Text="AIDE" FontWeight="Bold" FontSize="18"/>
-            </Button>
-          </Grid>-->
-        </Grid>
-
-      </Grid>
     </Grid>
 </Window>

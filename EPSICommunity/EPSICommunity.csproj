@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -104,6 +104,46 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Classe.cs" />
+    <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\Conversation.cs" />
+    <Compile Include="Model\DemandeSuppression.cs" />
+    <Compile Include="Model\Droit.cs" />
+    <Compile Include="Model\ExtraitCode.cs" />
+    <Compile Include="Model\ExtraitCodeApprouved.cs" />
+    <Compile Include="Model\Favoris.cs" />
+    <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\RestrictionDroit.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserRole.cs" />
+    <Compile Include="Model\Vote.cs" />
+    <Compile Include="Utils\Converter\DateAgoConverter.cs" />
+    <Compile Include="Utils\Converter\FontBoldConverter.cs" />
+    <Compile Include="Utils\Converter\FontColorConverter.cs" />
+    <Compile Include="Utils\Converter\PictureProfilConverter.cs" />
+    <Compile Include="Utils\Data\dataUtils.cs" />
+    <Compile Include="Utils\Habilitation\MessageHabilitation.cs" />
+    <Compile Include="Utils\Session\UserConnected.cs" />
+    <Compile Include="Utils\Template\CommentListTemplate.cs" />
+    <Compile Include="Utils\Template\MessageListTemplate.cs" />
+    <Compile Include="Utils\Template\TemplateClass\ItemListComment.cs" />
+    <Compile Include="Utils\Template\TemplateClass\ItemListMessage.cs" />
+    <Compile Include="Utils\Transformer\TextEncoder.cs" />
+    <Compile Include="Views\Administration\Roles\GestionRoles.xaml.cs">
+      <DependentUpon>GestionRoles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Roles\GestionRolesViewModel.cs" />
+    <Compile Include="Views\Code\AddExtraitCode.xaml.cs">
+      <DependentUpon>AddExtraitCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Code\CodeViewModel.cs" />
+    <Compile Include="Views\Code\ExtraitCodeHome.xaml.cs">
+      <DependentUpon>ExtraitCodeHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Code\ExtraitCodeItem.xaml.cs">
+      <DependentUpon>ExtraitCodeItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Converters.cs" />
     <Compile Include="Views\Communaute\Aide\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
@@ -115,6 +155,24 @@
       <DependentUpon>Documentation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Communaute\Documentation\DocumentationViewModel.cs" />
+    <Compile Include="Views\Administration\Administration.xaml.cs">
+      <DependentUpon>Administration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\AdministrationViewModel.cs" />
+    <Compile Include="Views\Administration\Utilisateurs\GestionUtilisateurs.xaml.cs">
+      <DependentUpon>GestionUtilisateurs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\Utilisateurs\GestionUtilisateursViewModel.cs" />
+    <Compile Include="Views\Messagerie\Chat\AddChat.xaml.cs">
+      <DependentUpon>AddChat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messagerie\Chat\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messagerie\MessagerieHome.xaml.cs">
+      <DependentUpon>MessagerieHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Messagerie\MessageViewModel.cs" />
     <Compile Include="Views\Profil\Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>
     </Compile>
@@ -140,6 +198,27 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Communaute\Documentation\Documentation.xaml">
+    <Page Include="Views\Administration\Roles\GestionRoles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Code\AddExtraitCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Code\ExtraitCodeHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Code\ExtraitCodeItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Administration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\Utilisateurs\GestionUtilisateurs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +227,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messagerie\Chat\AddChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messagerie\Chat\Chat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Messagerie\MessagerieHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +295,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Checkmark.png" />
     <Resource Include="Resources\Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\unnamed.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
