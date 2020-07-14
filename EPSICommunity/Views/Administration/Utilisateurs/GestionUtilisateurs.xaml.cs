@@ -30,9 +30,9 @@ namespace EPSICommunity.Views.Administration.Utilisateurs
             this.DataContext = _viewModel;
         }
 
-        private void EditUser(object sender, RoutedEventArgs e)
+        private void RemoveUser(object sender, RoutedEventArgs e)
         {
-
+            _viewModel.RemoveUser();
         }
     }
 }

@@ -334,7 +334,7 @@
                                                  Foreground="#FFF"
                                                  Margin="13,0,0,0"
                                                  Tag="PageDocumentation"/>
-                                <TextBlock Text="Aide"
+                                <TextBlock Text="Documentation"
                                            Margin="25,0,0,0"
                                            Height="14px"
                                            Foreground="#FFF"
@@ -344,31 +344,6 @@
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_doc"
                                          Content="Documentation"
-                                         Style="{StaticResource tt_style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
-
-                        <!--Favoris-->
-                        <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15"
-                                      MouseEnter="ListViewItem_MouseEnter">
-                            <StackPanel Orientation="Horizontal"
-                                        Width="230"
-                                        PreviewMouseLeftButtonDown="ChangePage">
-                                <fa:ImageAwesome Icon="StarOutline" Height="25" Width="25"
-                                                 Foreground="#FFF"
-                                                 Margin="8,0,0,0"
-                                                 Tag="PageFavoris"/>
-                                <TextBlock Text="Favoris"
-                                           Margin="25,0,0,0"
-                                           Height="14px"
-                                           Foreground="#FFF"
-                                           Tag="PageFavoris"/>
-                            </StackPanel>
-                            <!--Tooltip-->
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_favoris"
-                                         Content="Favoris"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
                         </ListViewItem>

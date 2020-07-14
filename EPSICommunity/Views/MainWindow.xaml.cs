@@ -114,7 +114,6 @@ namespace EPSICommunity.Views
                 tt_ide.Visibility = Visibility.Collapsed;
                 tt_search.Visibility = Visibility.Collapsed;
                 tt_help.Visibility = Visibility.Collapsed;
-                tt_favoris.Visibility = Visibility.Collapsed;
                 tt_settings.Visibility = Visibility.Collapsed;
             }
             else
@@ -126,7 +125,6 @@ namespace EPSICommunity.Views
                 tt_ide.Visibility = Visibility.Visible;
                 tt_search.Visibility = Visibility.Visible;
                 tt_help.Visibility = Visibility.Visible;
-                tt_favoris.Visibility = Visibility.Visible;
                 tt_settings.Visibility = Visibility.Visible;
             }
         }

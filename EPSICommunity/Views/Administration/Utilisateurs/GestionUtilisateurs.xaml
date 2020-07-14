@@ -97,13 +97,15 @@
                            FontSize="18" FontWeight="DemiBold"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <DataGrid Grid.Row="1" ItemsSource="{Binding Users}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"
+                          AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Click="EditUser" ToolTip="Modifier l'utilisateur">
-                                        <materialDesign:PackIcon Kind="UserEdit"/>
+                                    <Button Click="RemoveUser" ToolTip="Supprimer l'utilisateur" 
+                                            Background="Red" BorderBrush="Red">
+                                        <materialDesign:PackIcon Kind="UserMinus"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -111,7 +113,7 @@
 
                         <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
                         <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}"/>
-                        <DataGridTextColumn Header="Rôle" Binding="{Binding Role}"/>
+                        <!--<DataGridTextColumn Header="Rôle" Binding="{Binding Role}"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

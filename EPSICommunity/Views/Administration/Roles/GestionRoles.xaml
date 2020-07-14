@@ -40,12 +40,20 @@
                     </Separator.RenderTransform>
                 </Separator>
 
-                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" 
-                        Background="Green" BorderBrush="Green"
-                        ToolTip="Ajouter un rôle" ToolTipService.Placement="Right"
-                        HorizontalAlignment="Left" Click="ShowFormAdd_OnClick">
-                    <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" Foreground="White"/>
-                </Button>
+                <WrapPanel Grid.Row="2">
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" 
+                            Background="Green" BorderBrush="Green"
+                            ToolTip="Ajouter un rôle" ToolTipService.Placement="Right"
+                            HorizontalAlignment="Left" Click="ShowFormAdd_OnClick">
+                        <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" 
+                            Background="Red" BorderBrush="Red" Margin="5, 0, 0, 0"
+                            ToolTip="Ajouter un rôle" ToolTipService.Placement="Right"
+                            HorizontalAlignment="Left" Click="RemoveRole_OnClick">
+                        <materialDesign:PackIcon Kind="Remove" Width="30" Height="30" Foreground="White"/>
+                    </Button>
+                </WrapPanel>
 
                 <ListBox Grid.Row="3" ItemsSource="{Binding Roles}" 
                          SelectionMode="Single" SelectedItem="{Binding SelectedRole}"

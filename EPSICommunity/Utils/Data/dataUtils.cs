@@ -515,7 +515,8 @@ namespace EPSICommunity.Utils.data
         {
             listFavoris = new List<Favoris>()
             {
-
+                new Favoris(1, 1, "ExtraitCode", 1),
+                new Favoris(1, 2, "ExtraitCode", 1)
             };
         }
 

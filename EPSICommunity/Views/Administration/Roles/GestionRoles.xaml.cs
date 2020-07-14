@@ -49,5 +49,10 @@ namespace EPSICommunity.Views.Administration.Roles
         {
             _viewModel.AddRole();
         }
+        
+        private void RemoveRole_OnClick(object sender, RoutedEventArgs e)
+        {
+            _viewModel.RemoveRole();
+        }
     }
 }

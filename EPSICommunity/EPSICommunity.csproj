@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\Classe.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Conversation.cs" />
@@ -112,9 +113,11 @@
     <Compile Include="Model\ExtraitCode.cs" />
     <Compile Include="Model\ExtraitCodeApprouved.cs" />
     <Compile Include="Model\Favoris.cs" />
+    <Compile Include="Model\Favorite.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\RestrictionDroit.cs" />
     <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\Tasks.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserRole.cs" />
     <Compile Include="Model\Vote.cs" />

@@ -37,19 +37,56 @@
                     </Button>
                 </Grid>
 
-                <Expander Grid.Row="1" IsExpanded="True" Header="En cours" Background="LightGray" HorizontalAlignment="Stretch">
+                <Expander Grid.Row="1" IsExpanded="True" Header="En cours" FontSize="18" FontWeight="Bold" Background="LightGray" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ListBox>
+                        <ListView ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTasks}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="100*"/>
+                                        </Grid.ColumnDefinitions>
 
-                        </ListBox>
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}" Checked="CheckBox_CheckTasks_OnChecked"/>
+                                        <TextBlock Grid.Column="1" HorizontalAlignment="Center">
+                                            <Run Text="{Binding Description}" FontSize="14"/>
+                                            <Run Text=" - "/>
+                                            <Run Text="{Binding EndDate, StringFormat=d, ConverterCulture=fr-FR}" FontSize="12" FontStyle="Italic"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
                 </Expander>
 
-                <Expander Grid.Row="2" IsExpanded="True" Header="Terminées" Background="LightGray" HorizontalAlignment="Stretch" Margin="0, 10, 0, 0">
+                <Expander Grid.Row="2" IsExpanded="True" Header="Terminées" FontSize="18" FontWeight="Bold" Background="LightGray" HorizontalAlignment="Stretch" Margin="0, 10, 0, 0">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ListBox>
+                        <ListView ItemsSource="{Binding TasksDone}" SelectedItem="{Binding SelectedTasks}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="100*"/>
+                                        </Grid.ColumnDefinitions>
 
-                        </ListBox>
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding IsDone}" Unchecked="CheckBox_UncheckTasks_OnUnchecked"/>
+                                        <Grid Grid.Column="1">
+                                            <TextBlock Name="txtDescriptionTasksDone"  Text="{Binding Description}" 
+                                                       FontStyle="Italic" HorizontalAlignment="Center">
+                                                <Run Text="{Binding Description}" FontSize="14"/>
+                                                <Run Text=" - "/>
+                                                <Run Text="{Binding EndDate, StringFormat=d, ConverterCulture=fr-FR}" FontSize="12"/>
+                                            </TextBlock>
+                                            <Line Stretch="Fill" Stroke="Gray" StrokeThickness="2" X1="1" 
+                                                  Width="{Binding ActualWidth, ElementName=txtDescriptionTasksDone}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
                 </Expander>
             </Grid>
@@ -68,7 +105,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Row="0" Content="Modifier mon profil" FontSize="12" Padding="5" Height="Auto" Margin="10, 10, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <!--<Button Grid.Row="0" Content="Modifier mon profil" FontSize="12" Padding="5" Height="Auto" Margin="10, 10, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>-->
 
                     <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
                         <Ellipse Height="100" Width="100">
@@ -76,16 +113,12 @@
                                 <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Default_Profile_Picture.png" Stretch="UniformToFill"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock Text="Prénom NOM" FontSize="16"/>
+                        <TextBlock Text="Nicolas CAZIN" FontSize="16"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Right" Margin="0, 5, 0, 10">
                         <TextBlock>
-                            <Run Text="Date de naissance : "/>
-                            <Run Text="{Binding BirthDate}"/>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run Text="Date d'inscription : "/>
+                            <Run Text="Date d'inscription : 10/07/2020"/>
                             <Run Text="{Binding RegistrationDate}"/>
                         </TextBlock>
                     </StackPanel>
@@ -98,7 +131,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Activité" FontSize="16" Margin="10, 0, 0, 0"/>
+                        <TextBlock Text="Activité" FontSize="18" FontWeight="Bold" Margin="10, 0, 0, 0"/>
                         <Separator>
                             <Separator.RenderTransform>
                                 <ScaleTransform ScaleY="2"/>
@@ -106,9 +139,18 @@
                         </Separator>
                     </StackPanel>
 
-                    <ListBox Grid.Row="1">
-
-                    </ListBox>
+                    <ListView Grid.Row="1">
+                        <ListView ItemsSource="{Binding Activities}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Description}" FontSize="14"/>
+                                        <TextBlock Text="{Binding Date}" FontSize="12" FontWeight="Light"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ListView>
                 </Grid>
             </Grid>
             <!--#endregion-->
@@ -125,9 +167,14 @@
                         <materialDesign:PackIcon Kind="Star" Foreground="#FCAF16" Height="25" Width="25"/>
                         <TextBlock Text="FAVORIS" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </DockPanel>
-                    <ListBox Margin="5">
 
-                    </ListBox>
+                    <ListView ItemsSource="{Binding Favorites}" Margin="5">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" FontSize="14"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
 
                 <Button Grid.Row="1" Margin="5" Click="Button_OpenTodoList">

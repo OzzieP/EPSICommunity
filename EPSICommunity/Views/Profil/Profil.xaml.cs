@@ -41,5 +41,15 @@ namespace EPSICommunity.Views.Profil
             _viewModel.ShowTodoList = false;
             _viewModel.ShowProfile = true;
         }
+
+        private void CheckBox_CheckTasks_OnChecked(object sender, RoutedEventArgs e)
+        {
+            _viewModel.CheckTasks();
+        }
+
+        private void CheckBox_UncheckTasks_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            _viewModel.UncheckTasks();
+        }
     }
 }

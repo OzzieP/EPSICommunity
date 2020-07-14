@@ -80,5 +80,19 @@ namespace EPSICommunity.Views.Administration.Roles
             _listRoles = dataUtils.GetListRoles();
             Roles.Refresh();
         }
+        
+        public void RemoveRole()
+        {
+            if (SelectedRole == null)
+            {
+                MessageBox.Show("Veuillez sélectionner un rôle à supprimer dans la liste", "Attention", 
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            dataUtils.RemoveRole(SelectedRole.Id);
+            _listRoles = dataUtils.GetListRoles();
+            Roles.Refresh();
+        }
     }
 }
