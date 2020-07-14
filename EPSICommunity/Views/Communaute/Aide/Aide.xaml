@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EPSICommunity.Views.Communaute.Aide.Aide"
+<UserControl x:Class="EPSICommunity.Views.Communaute.Aide.Aide"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -28,7 +28,7 @@
                         </Separator.RenderTransform>
                     </Separator>
 
-                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}" DropDownClosed="ComboBoxFilter_DropDownClosed"/>
+                    <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}"/>
 
                 </StackPanel>
 
@@ -40,7 +40,7 @@
                         </Separator.RenderTransform>
                     </Separator>
                     <Button  Margin="2" Content="Ajouter une aide" Click="ButtonAdd_Click"/>
-                    <Button  Margin="2" Content="Modifier une aide" Click="ButtonUpdate_Click"/>
+                    <Button  Margin="2" Content="Supprimer une aide" Click="ButtonDelete_Click"/>
                 </StackPanel>
 
                 <Grid Grid.Row="1">
@@ -69,13 +69,11 @@
                         </Grid.RowDefinitions>
                         <TextBox  Grid.Row="1" materialDesign:HintAssist.Hint="Modification du Nom de l'aide  " Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedNom}"/>
                         <TextBox  Grid.Row="2" materialDesign:HintAssist.Hint="Modification Description de l'aide "  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Text="{Binding SelectedDescription}"/>
-                        <Button  Grid.Row="3"  Margin="2" Content="Modifier" Click="ButtonUpdateAide_Click"/>
-                        <!--<Button  Grid.Row="3"  Margin="2" Content="Valider" Click="ButtonAddAide_Click"/>-->
                     </Grid>
                 </Grid>
             </Grid>
 
-            <ListBox Grid.Column="1" ItemsSource="{Binding ListeAides}" >
+            <ListBox Grid.Column="1" ItemsSource="{Binding ListeAides}" SelectedItem="{Binding SelectedAides}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">

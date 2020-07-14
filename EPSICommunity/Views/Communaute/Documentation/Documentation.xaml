@@ -57,7 +57,7 @@
                             </Separator.RenderTransform>
                         </Separator>
                         <Button  Margin="2" Content="Ajouter une documentation" Click="ButtonAdd_Click"/>
-                        <!--<Button  Margin="2" Content="Modifier " Click="ButtonUpdate_Click"></Button>-->
+                        <Button  Margin="2" Content="Supprimer " Click="ButtonDelete_Click"></Button>
 
                     </StackPanel>
 
@@ -77,7 +77,7 @@
                 </Grid>
             </Grid>
 
-            <ListBox Grid.Column="1" ItemsSource="{Binding ListeDocumentation}" >
+            <ListBox Grid.Column="1" ItemsSource="{Binding ListeDocumentation}" SelectedItem="{Binding SelectedDocumentation}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">

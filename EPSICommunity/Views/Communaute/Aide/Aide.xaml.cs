@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,19 +41,9 @@ namespace EPSICommunity.Views.Communaute.Aide
             _viewModel.ShowFormDoc = true;
         }
 
-        private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.ShowFormUpdateDoc = true;
-        }
-
-        private void ButtonUpdateAide_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ComboBoxFilter_DropDownClosed(object sender, EventArgs e)
-        {
-            _viewModel.Filter();
+            _viewModel.DeleteAide();
         }
     }
 }

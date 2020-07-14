@@ -18,8 +18,8 @@ namespace EPSICommunity.Views.Communaute.Aide
         public ICollectionView ListeAides { get; set; }
 
 
-        private String _selectedAides;
-        public String SelectedAides
+        private Aides _selectedAides;
+        public Aides SelectedAides
         {
             get { return _selectedAides; }
             set
@@ -112,7 +112,7 @@ namespace EPSICommunity.Views.Communaute.Aide
 
             _listeAides = new List<Aides>
             {
-                new Aides { Nom = "WPF" , Description = "Matthieu est doué en SQL", Language = "SQL"},
+                new Aides { Nom = "WPF" , Description = "Matthieu est douÃ© en SQL", Language = "SQL"},
                 new Aides { Nom = "WPF" , Description = "Brendan est fort en C#", Language = "C#"},
                 new Aides { Nom = "testing" , Description = "Pour l'environement test, il est conseiller d'utiliser le package UnitTest en C#", Language = "Testing"}
             };
@@ -142,22 +142,11 @@ namespace EPSICommunity.Views.Communaute.Aide
             ListeAides.Refresh();
         }
 
-        public void UpdateAide()
+        public void DeleteAide()
         {
-
-        }
-
-        public void Filter()
-        {
-            ListeAides = CollectionViewSource.GetDefaultView(_listeAides);
-
-            _listeFiltered.Clear();
-            var abc = _listeAides.FindAll(c => c.Language == SelectedLanguage);
-            _listeFiltered.AddRange(abc);
-            
-            //_listeFiltered.AddRange(_listeAides.FindAll(c => c.Language == SelectedLanguage));
-            ListeAides = CollectionViewSource.GetDefaultView(_listeFiltered);
+            _listeAides.Remove(SelectedAides);
             ListeAides.Refresh();
+
         }
     }
 }
