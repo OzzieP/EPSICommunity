@@ -47,6 +47,28 @@ namespace EPSICommunity.Views.Profil
             }
         }
 
+        private string _selectedDescription;
+        public string SelectedDescription
+        {
+            get { return _selectedDescription; }
+            set
+            {
+                _selectedDescription = value;
+                NotifyPropertyChanged("SelectedDescription");
+            }
+        }
+
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                NotifyPropertyChanged("SelectedDate");
+            }
+        }
+
 
         private List<Tasks> _listTasks { get; set; }
         public ICollectionView Tasks { get; private set; }
@@ -96,6 +118,7 @@ namespace EPSICommunity.Views.Profil
             Favorites = CollectionViewSource.GetDefaultView(_listFavorites);
             Favorites.Refresh();
 
+            SelectedDate = DateTime.Today;
             ShowProfile = true;
         }
 
@@ -121,6 +144,20 @@ namespace EPSICommunity.Views.Profil
 
                 TasksDone.Refresh();
                 Tasks.Refresh();
+            }
+        }
+
+        public void AddTasks()
+        {
+            if (!string.IsNullOrWhiteSpace(SelectedDescription) && SelectedDate != null)
+            {
+                _listTasks.Add(new Tasks(_listTasks.Count + 1, SelectedDescription, false, SelectedDate));
+                Tasks.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez saisir une description pour la tâche à ajouter", "Attention",
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
     }

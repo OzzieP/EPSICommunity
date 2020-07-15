@@ -51,5 +51,11 @@ namespace EPSICommunity.Views.Profil
         {
             _viewModel.UncheckTasks();
         }
+
+        private void TbxDecription_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                _viewModel.AddTasks();
+        }
     }
 }

@@ -34,5 +34,15 @@ namespace EPSICommunity.Views.Administration.Utilisateurs
         {
             _viewModel.RemoveUser();
         }
+
+        private void CbxName_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            _viewModel.ResetFilter();
+        }
+
+        private void BtnFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            _viewModel.FilterUsers();
+        }
     }
 }

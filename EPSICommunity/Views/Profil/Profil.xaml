@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:EPSICommunity.Views.Profil"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:showMeTheXaml="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML" 
+             xmlns:showMeTheXaml="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" Background="White" MinHeight="450" MinWidth="800">
 
     <Grid>
@@ -19,6 +20,7 @@
             <Grid Grid.Column="0" Visibility="{Binding ShowTodoList, Converter={StaticResource TrueToVisible}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -89,6 +91,24 @@
                         </ListView>
                     </StackPanel>
                 </Expander>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="200*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <fa:ImageAwesome Grid.Column="0" Icon="Plus" Foreground="DarkGray" 
+                                     Width="20" Height="20" Margin="5, 0, 5, 0"/>
+                    <TextBox Grid.Column="1" materialDesign:HintAssist.Hint="Ajouter une tâche" Text="{Binding SelectedDescription}" 
+                             KeyDown="TbxDecription_OnKeyDown" Margin="0, 0, 5, 0"/>
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" 
+                                IsTodayHighlighted="True" Margin="0, 0, 5, 0"/>
+                </Grid>
             </Grid>
             <!--#endregion-->
 

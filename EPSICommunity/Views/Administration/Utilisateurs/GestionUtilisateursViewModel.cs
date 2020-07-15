@@ -24,14 +24,26 @@ namespace EPSICommunity.Views.Administration.Utilisateurs
             }
         }
 
-        private List<User> _listUsers { get; set; }
+        private string _selectedName;
+        public string SelectedName
+        {
+            get { return _selectedName; }
+            set
+            {
+                _selectedName = value;
+                NotifyPropertyChanged("SelectedName");
+            }
+        }
+
+
+        private List<User> _listUsers = new List<User>();
 
         public ICollectionView Users { get; private set; }
 
 
         public GestionUtilisateursViewModel()
         {
-            _listUsers = dataUtils.GetListUsers();
+            _listUsers.AddRange(dataUtils.GetListUsers());
 
             Users = CollectionViewSource.GetDefaultView(_listUsers);
             Users.Refresh();
@@ -47,6 +59,23 @@ namespace EPSICommunity.Views.Administration.Utilisateurs
             }
 
             _listUsers.Remove(SelectedUser);
+            Users.Refresh();
+        }
+
+        public void FilterUsers()
+        {
+            string name = SelectedName.ToUpper();
+            List<User> tempUsers = _listUsers.FindAll(u => u.Nom == name);
+
+            _listUsers.Clear();
+            _listUsers.AddRange(tempUsers);
+            Users.Refresh();
+        }
+
+        public void ResetFilter()
+        {
+            _listUsers.Clear();
+            _listUsers.AddRange(dataUtils.GetListUsers());
             Users.Refresh();
         }
     }
