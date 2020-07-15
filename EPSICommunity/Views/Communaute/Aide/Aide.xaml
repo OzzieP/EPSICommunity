@@ -29,7 +29,7 @@
                     </Separator>
 
                     <ComboBox  Margin="2"  SelectedItem="{Binding SelectedLanguage}" ItemsSource="{Binding ListeLanguage}"/>
-
+                    <Button  Margin="2" Content="Valider" Click="ButtonFilter_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1"   Orientation="Vertical">

@@ -136,5 +136,13 @@ namespace EPSICommunity.Views.Communaute.Documentation
         }
 
 
+        public void FilterDoc()
+        {
+            List<Docs> tempDocs = _listeDocumentation.FindAll(d => d.Language == SelectedLanguage);
+
+            _listeDocumentation.Clear();
+            _listeDocumentation.AddRange(tempDocs);
+            ListeDocumentation.Refresh();
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace EPSICommunity.Views.Communaute.Documentation
 
         private void ButtonFilter_Click(object sender, RoutedEventArgs e)
         {
-
+            _viewModel.FilterDoc();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)

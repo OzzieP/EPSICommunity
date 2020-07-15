@@ -45,5 +45,10 @@ namespace EPSICommunity.Views.Communaute.Aide
         {
             _viewModel.DeleteAide();
         }
+
+        private void ButtonFilter_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.FilterAide();
+        }
     }
 }
